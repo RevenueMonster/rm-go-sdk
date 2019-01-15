@@ -4,7 +4,7 @@ This is an Go SDK that maps some of the RESTful methods of Open API that are doc
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-The golang version 1.9 and above
+The golang version 1.11 and above
 
 ### Covered Functions
 - [x] Signature Algorithm
