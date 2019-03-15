@@ -85,8 +85,14 @@ func (c Client) GetRMWeChatUserInfoByCode(request RequestGetRMWeChatUserInfoByCo
 
 // RequestSendWeChatPageTemplateMessage :
 type RequestSendWeChatPageTemplateMessage struct {
-	UserID string          `json:"userId"`
-	Data   json.RawMessage `json:"data"`
+	UserID      string `json:"userId"`
+	TemplateID  string `json:"templateId"`
+	URL         string `json:"url"`
+	MiniProgram struct {
+		AppID    string `json:"appId"`
+		PagePath string `json:"pagePath"`
+	} `json:"miniProgram"`
+	Data json.RawMessage `json:"data"`
 }
 
 // ReponseSendWeChatPageTemplateMessage :
