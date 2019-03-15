@@ -10,6 +10,7 @@ const (
 	ScopeManagePushNotication    string = "manage_push_notification"
 	ScopeManagePayment           string = "manage_payment"
 	ScopeManageStore             string = "manage_store"
+	ScopeManageSocialMedia       string = "manage_social_media"
 	ScopeGetMerchantProfile      string = "get_merchant_profile"
 	ScopeGetUserProfile          string = "get_user_profile"
 	ScopeGetMerchantSubscription string = "get_merchant_subscription"
