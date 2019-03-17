@@ -121,3 +121,33 @@ func (c Client) SendWeChatPageTemplateMessage(request RequestSendWeChatPageTempl
 
 	return response, nil
 }
+
+// ResponseGetWeChatPageAccessToken :
+type ResponseGetWeChatPageAccessToken struct {
+	Item struct {
+		AccessToken string `json:"accessToken"`
+	} `json:"item"`
+	Code string `json:"code"`
+	Err  *Error `json:"error"`
+}
+
+// GetWeChatPageAccessToken :
+func (c Client) GetWeChatPageAccessToken() (*ResponseGetWeChatPageAccessToken, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathAPIGetWeChatPageAccessTokenURL.method
+	requestURL := c.prepareAPIURL(pathAPIGetWeChatPageAccessTokenURL)
+
+	response := new(ResponseGetWeChatPageAccessToken)
+	if err := c.httpAPI(method, requestURL, nil, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
