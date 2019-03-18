@@ -80,7 +80,11 @@ type PaymentTransaction struct {
 	BalanceAmount int    `json:"balanceAmount"`
 	Platform      string `json:"platform"`
 	Method        string `json:"method"`
-	Error         struct {
+	Payee         struct {
+		UserID    string `json:"userId"`
+		SubUserID string `json:"subUserId"`
+	} `json:"payee"`
+	Error struct {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	} `json:"error"`
