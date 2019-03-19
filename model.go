@@ -104,6 +104,10 @@ type Merchant struct {
 	CompanyLogoURL     string    `json:"companyLogoUrl"`
 	RegistrationNumber string    `json:"registrationNumber"`
 	BusinessCategory   string    `json:"businessCategory"`
+	BusinessScope      string    `json:"businessScope"`
+	SourceOfFunds      string    `json:"sourceOfFunds"`
+	CustomerOrigin     string    `json:"customerOrigin"`
+	WebsiteUrl         string    `json:"websiteUrl"`
 	EstablishedAt      time.Time `json:"establishedAt"`
 	CountryCode        string    `json:"countryCode"`
 	PhoneNumber        string    `json:"phoneNumber"`
