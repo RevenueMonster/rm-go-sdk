@@ -64,3 +64,6 @@ var pathAPIGetRMWeChatUserOAuthURL = newPath(methodPOST, "/socialmedia/rm/wechat
 var pathAPIGetRMWeChatUserInfoByCodeURL = newPath(methodPOST, "/socialmedia/rm/wechat-oauth/code")
 var pathAPISendWeChatPageTemplateMessageURL = newPath(methodPOST, "/socialmedia/wechat/template-message")
 var pathAPIGetWeChatPageAccessTokenURL = newPath(methodGET, "/socialmedia/wechat/access-token")
+
+// Event
+var pathAPIPostSendEventURL = newPath(methodPOST, "/event")
