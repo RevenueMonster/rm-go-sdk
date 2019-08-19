@@ -27,7 +27,7 @@ func (c Client) SendEvent(req SendEventRequest) (*SendEventRequestResponse, erro
 	requestURL := c.prepareAPIURL(pathAPIPostSendEventURL)
 
 	response := new(SendEventRequestResponse)
-	if err := c.httpAPI(method, fmt.Sprintf("%s", requestURL), nil, response); err != nil {
+	if err := c.httpAPI(method, fmt.Sprintf("%s", requestURL), req, response); err != nil {
 		return nil, err
 	}
 
