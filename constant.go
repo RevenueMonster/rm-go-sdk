@@ -48,6 +48,10 @@ var pathOAuthPathTokenURL = newPath(methodPOST, "/token")
 var pathAPICreatePaymentTransactionQRURL = newPath(methodPOST, "/payment/transaction/qrcode")
 var pathAPIGetPaymentTransactionQRURL = newPath(methodGET, "/payment/transaction/qrcode")
 
+// Checkout Endpoint
+var pathAPICreatePaymentCheckoutURL = newPath(methodPOST, "/payment/online")
+var pathAPIGetQRCodeByCheckoutIDURL = newPath(methodGET, "/payment/online/qrcode")
+
 // Payment Transaction Endpoint
 var pathAPIGetPaymentTransactionByIDURL = newPath(methodGET, "/payment/transaction")
 var pathAPIRefundPaymentURL = newPath(methodPOST, "/payment/refund")

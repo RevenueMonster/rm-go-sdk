@@ -12,7 +12,6 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	"log"
 	"sort"
 	"strconv"
 	"strings"
@@ -112,7 +111,6 @@ func Generate(timestamp, nonceStr, method, requestURL, signType, body string, pr
 	if err != nil {
 		return nil, err
 	}
-	log.Println("formData: ", data)
 
 	signature, err := rsa2Hash(h, []byte(data), privateKey)
 	if err != nil {
