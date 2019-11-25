@@ -54,6 +54,7 @@ var pathAPIGetQRCodeByCheckoutIDURL = newPath(methodGET, "/payment/online/qrcode
 
 // Payment Transaction Endpoint
 var pathAPIGetPaymentTransactionByIDURL = newPath(methodGET, "/payment/transaction")
+var pathAPIGetPaymentTransactionByOrderIDURL = newPath(methodGET, "/payment/transaction/order")
 var pathAPIRefundPaymentURL = newPath(methodPOST, "/payment/refund")
 var pathAPIReversedPaymentURL = newPath(methodPOST, "/payment/reverse")
 
