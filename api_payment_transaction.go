@@ -148,24 +148,3 @@ func (c Client) GetSuccessPaymentTransactionsByQRCode(code string) (*ResponsePay
 
 	return response, nil
 }
-
-// GetPaymentTransactionByOrderID :
-func (c Client) GetPaymentTransactionByOrderID(orderID string) (*ResponsePaymentTransactionItem, error) {
-	if c.err != nil {
-		return nil, c.err
-	}
-
-	method := pathAPIGetPaymentTransactionByOrderIDURL.method
-	requestURL := c.prepareAPIURL(pathAPIGetPaymentTransactionByOrderIDURL)
-
-	response := new(ResponsePaymentTransactionItem)
-	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, orderID), nil, response); err != nil {
-		return nil, err
-	}
-
-	if response.Err != nil {
-		return response, errors.New(response.Err.Message)
-	}
-
-	return response, nil
-}
