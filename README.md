@@ -39,7 +39,7 @@ The golang version 1.11 and above
 - [ ] Get Voucher Batches
 - [ ] Get Voucher Batch By Key
 - [ ] Send Notification (Merchant)
-- [ ] Send Notification (Store)
+- [x] Send Notification (Store)
 - [ ] Send Notification (User)
 
 ### Usage
@@ -134,8 +134,20 @@ environment.setEnvironment(clientId, clientSecret, "sandbox");
 
 * Payment (Quick Pay) - Get Payment Transaction By Order ID
     * To get details of a transaction by using orderId
-``
+```
 ```
 
-
-
+* Push Notification ( Store ) - Send Notificaiton To Store By Store ID
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey: []byte(`---private key---`),
+    PublicKey:  []byte(`---public key---`),
+}).PushNotificationToStore(sdk.RequestPushNotificationToStore{
+    StoreID: "123123123",
+    Title:   "Notification Title",
+    Body:    "Notification Body",
+})
+```
