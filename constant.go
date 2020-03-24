@@ -74,3 +74,6 @@ var pathAPIGetWeChatPageAccessTokenURL = newPath(methodGET, "/socialmedia/wechat
 
 // Event
 var pathAPIPostSendEventURL = newPath(methodPOST, "/event")
+
+// PushNotification
+var pathAPIPushNotificationToStoreURL = newPath(methodPOST, "/push-notification/store")
