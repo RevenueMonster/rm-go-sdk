@@ -39,7 +39,7 @@ func GenerateDataBase64(jsonData []byte) (string, error) {
 
 	if jsonData != nil {
 		m, err := mxj.NewMapJson(jsonData)
-		sortJSON, err := m.Json()
+		sortJSON, err := m.Json(true)
 		if err = json.Compact(bodyBuffer, sortJSON); err != nil {
 			return "", err
 		}
@@ -70,7 +70,7 @@ func (c *Client) generateSignature(data interface{}, method, requestURL string) 
 
 	if data != nil {
 		m, err := mxj.NewMapJson(jsonData)
-		sortJSON, err := m.Json()
+		sortJSON, err := m.Json(true)
 		if err = json.Compact(bodyBuffer, sortJSON); err != nil {
 			return nil, err
 		}
