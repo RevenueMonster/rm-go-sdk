@@ -19,8 +19,9 @@ const (
 // private function
 // Method
 const (
-	methodPOST = "POST"
-	methodGET  = "GET"
+	methodPOST   = "POST"
+	methodGET    = "GET"
+	methodDELETE = "DELETE"
 )
 
 // Default
@@ -77,3 +78,8 @@ var pathAPIPostSendEventURL = newPath(methodPOST, "/event")
 
 // PushNotification
 var pathAPIPushNotificationToStoreURL = newPath(methodPOST, "/push-notification/store")
+
+// DNS
+var pathCreateDNSRecordURL = newPath(methodPOST, "/dns/record")
+var pathGetDNSRecordsURL = newPath(methodGET, "/dns/records")
+var pathDeleteDNSRecordURL = newPath(methodDELETE, "/dns/record")
