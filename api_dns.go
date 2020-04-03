@@ -1,5 +1,7 @@
 package sdk
 
+import "fmt"
+
 // RequestCreateDNSRecord :
 type RequestCreateDNSRecord struct {
 	RootDomain    string `json:"rootDomain"`
@@ -61,16 +63,16 @@ type ResponseGetDNSRecords struct {
 }
 
 // GetDNSRecords :
-func (c Client) GetDNSRecords(request RequestGetDNSRecords) (*ResponseGetDNSRecords, error) {
+func (c Client) GetDNSRecords(rootDomain, subDomainName string) (*ResponseGetDNSRecords, error) {
 	if c.err != nil {
 		return nil, c.err
 	}
 
 	method := pathGetDNSRecordsURL.method
-	requestURL := c.prepareAPIURL(pathGetDNSRecordsURL)
+	requestURL := c.prepareAPIURL(pathGetDNSRecordsURL) + fmt.Sprintf("?rootDomain=%s&subDomainName=%s", rootDomain, subDomainName)
 
 	response := new(ResponseGetDNSRecords)
-	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+	if err := c.httpAPI(method, requestURL, nil, response); err != nil {
 		return nil, err
 	}
 
