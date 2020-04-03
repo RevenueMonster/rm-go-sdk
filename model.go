@@ -99,6 +99,7 @@ type PaymentTransaction struct {
 // Merchant :
 type Merchant struct {
 	ID                 string    `json:"id"`
+	BrandName          string    `json:"brandName"`
 	CompanyName        string    `json:"companyName"`
 	CompanyType        string    `json:"companyType"`
 	CompanyLogoURL     string    `json:"companyLogoUrl"`
