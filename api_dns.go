@@ -2,17 +2,20 @@ package sdk
 
 import "fmt"
 
+// Kubernetes :
+type Kubernetes struct {
+	Cluster   string `json:"cluster"`
+	Service   string `json:"service"`
+	Namespace string `json:"namespace"`
+	Port      int    `json:"port"`
+}
+
 // RequestCreateDNSRecord :
 type RequestCreateDNSRecord struct {
-	RootDomain    string `json:"rootDomain"`
-	SubDomainName string `json:"subDomainName"`
-	IP            string `json:"ip"`
-	Kubernetes    struct {
-		Cluster   string `json:"cluster"`
-		Service   string `json:"service"`
-		Namespace string `json:"namespace"`
-		Port      int    `json:"port"`
-	} `json:"kubernetes"`
+	RootDomain    string     `json:"rootDomain"`
+	SubDomainName string     `json:"subDomainName"`
+	IP            string     `json:"ip"`
+	Kubernetes    Kubernetes `json:"kubernetes"`
 }
 
 // ResponseCreateDNSRecord :
@@ -81,14 +84,9 @@ func (c Client) GetDNSRecords(rootDomain, subDomainName string) (*ResponseGetDNS
 
 // RequestDeleteDNSRecord :
 type RequestDeleteDNSRecord struct {
-	RootDomain    string `json:"rootDomain"`
-	SubDomainName string `json:"subDomainName"`
-	Kubernetes    struct {
-		Cluster   string `json:"cluster"`
-		Service   string `json:"service"`
-		Namespace string `json:"namespace"`
-		Port      int    `json:"port"`
-	} `json:"kubernetes"`
+	RootDomain    string     `json:"rootDomain"`
+	SubDomainName string     `json:"subDomainName"`
+	Kubernetes    Kubernetes `json:"kubernetes"`
 }
 
 // ResponseDeleteDNSRecord :
