@@ -50,12 +50,12 @@ type RequestGetDNSRecords struct {
 
 // ResponseGetDNSRecords :
 type ResponseGetDNSRecords struct {
-	Item []struct {
+	Items []struct {
 		Type  string `json:"type"`
 		Name  string `json:"name"`
 		IP    string `json:"ip"`
 		Proxy bool   `json:"proxy"`
-	} `json:"item"`
+	} `json:"items"`
 	Code string `json:"code"`
 	Err  *Error `json:"error"`
 }
