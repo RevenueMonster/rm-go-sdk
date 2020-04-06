@@ -34,26 +34,33 @@ const (
 	VendorTypeMySpeedy VendorType = "MYSPEEDY"
 )
 
+// DeliveryVendor :
+type DeliveryVendor struct {
+	Vendor     VendorType `json:"vendor"`
+	Credential string     `json:"credential"`
+}
+
+type DeliveryPoint struct {
+	Address        string               `json:"address"`
+	EntranceNumber string               `json:"entranceNumber"`
+	FloorNumber    string               `json:"floorNumber"`
+	BuildingNumber string               `json:"buildingNumber"`
+	Remark         string               `json:"remark"`
+	Contact        DeliveryPointContact `json:"contact"`
+}
+
+type DeliveryPointContact struct {
+	Name        string `json:"name"`
+	PhoneNumber string `json:"phoneNumber"`
+}
+
 // RequestCreateDelivery :
 type RequestCreateDelivery struct {
-	DeliveryVendor struct {
-		Vendor     VendorType `json:"vendor" validate:"required,eq=MYSPEEDY"`
-		Credential string     `json:"credential"`
-	} `json:"deliveryVendor"`
-	VehicleType   VehicleType  `json:"vehicleType"`
-	Type          DeliveryType `json:"type"`
-	IsCashAccount bool         `json:"isCashAccount"`
-	Points        []struct {
-		Address        string `json:"address"`
-		EntranceNumber string `json:"entranceNumber"`
-		FloorNumber    string `json:"floorNumber"`
-		BuildingNumber string `json:"buildingNumber"`
-		Remark         string `json:"remark"`
-		Contact        struct {
-			Name        string `json:"name"`
-			PhoneNumber string `json:"phoneNumber"`
-		} `json:"contact"`
-	} `json:"points"`
+	DeliveryVendor DeliveryVendor  `json:"deliveryVendor"`
+	VehicleType    VehicleType     `json:"vehicleType"`
+	Type           DeliveryType    `json:"type"`
+	IsCashAccount  bool            `json:"isCashAccount"`
+	Points         []DeliveryPoint `json:"points"`
 }
 
 // ResponseCreateDelivery :
@@ -103,26 +110,13 @@ func (c Client) GetDeliveryByID(id string) (*ResponseGetDeliveryByID, error) {
 	return response, nil
 }
 
-// RequestCalculateDeliveryFee\ :
+// RequestCalculateDeliveryFee :
 type RequestCalculateDeliveryFee struct {
-	DeliveryVendor struct {
-		Vendor     VendorType `json:"vendor" validate:"required,eq=MYSPEEDY"`
-		Credential string     `json:"credential"`
-	} `json:"deliveryVendor"`
-	VehicleType   VehicleType  `json:"vehicleType"`
-	Type          DeliveryType `json:"type"`
-	IsCashAccount bool         `json:"isCashAccount"`
-	Points        []struct {
-		Address        string `json:"address"`
-		EntranceNumber string `json:"entranceNumber"`
-		FloorNumber    string `json:"floorNumber"`
-		BuildingNumber string `json:"buildingNumber"`
-		Remark         string `json:"remark"`
-		Contact        struct {
-			Name        string `json:"name"`
-			PhoneNumber string `json:"phoneNumber"`
-		} `json:"contact"`
-	} `json:"points"`
+	DeliveryVendor DeliveryVendor  `json:"deliveryVendor"`
+	VehicleType    VehicleType     `json:"vehicleType"`
+	Type           DeliveryType    `json:"type"`
+	IsCashAccount  bool            `json:"isCashAccount"`
+	Points         []DeliveryPoint `json:"points"`
 }
 
 // ResponseCalculateDeliveryFee :
