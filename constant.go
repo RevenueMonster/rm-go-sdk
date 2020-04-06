@@ -83,3 +83,11 @@ var pathAPIPushNotificationToStoreURL = newPath(methodPOST, "/push-notification/
 var pathCreateDNSRecordURL = newPath(methodPOST, "/dns/record")
 var pathGetDNSRecordsURL = newPath(methodGET, "/dns/records")
 var pathDeleteDNSRecordURL = newPath(methodDELETE, "/dns/record")
+
+// SMS
+var pathSendSms = newPath(methodPOST, "/sms")
+
+// Delivery
+var pathCreateDelivery = newPath(methodPOST, "/delivery")
+var parhGetDeliveryByID = newPath(methodGET, "/delivery/")
+var pathCalculateDeliveryFee = newPath(methodPOST, "/delivery/calculate")

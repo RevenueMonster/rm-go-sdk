@@ -41,6 +41,10 @@ The golang version 1.11 and above
 - [ ] Send Notification (Merchant)
 - [x] Send Notification (Store)
 - [ ] Send Notification (User)
+- [x] Sms Sending
+- [x] Create Delivery
+- [x] Get Delivery By Id
+- [x] Calculate Delivery Fee
 
 ### Usage
 1. "sandbox" is for sandbox environment.
@@ -150,4 +154,119 @@ sdk.NewClient(sdk.Client{
     Title:   "Notification Title",
     Body:    "Notification Body",
 })
+```
+
+* Sms Sending - Send Sms To Specified Phone Number
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey: []byte(`---private key---`),
+    PublicKey:  []byte(`---public key---`),
+}).SendSms(sdk.RequestSendSms{
+    CountryCode: "60",
+    PhoneNumber: "187824152",
+    Message: "Some message",
+    Type: sdk.MessageTypeTAC,
+})
+```
+
+* Create Delivery - Create delivery 
+```go
+pointOne := sdk.DeliveryPoint{
+    Address: "",
+    EntraceNumber: "",
+    FloorNumber: "",
+    BuildingNumber: "",
+    Remark: "",
+    Contact: sdk.DeliveryPointContact{
+        Name: "",
+        PhoneNumber: "",
+    },
+}
+
+pointTwo := sdk.DeliveryPoint{
+    Address: "",
+    EntraceNumber: "",
+    FloorNumber: "",
+    BuildingNumber: "",
+    Remark: "",
+    Contact: sdk.DeliveryPointContact{
+        Name: "",
+        PhoneNumber: "",
+    },
+}
+
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey: []byte(`---private key---`),
+    PublicKey:  []byte(`---public key---`),
+}).CreateDelivery(sdk.RequestCreateDelivery{
+    DeliveryVendor: sdk.DeliveryVendor{
+        Vendor: sdk.VendorTypeMySpeedy,
+        Credential: "",
+    },
+    VehicleType: sdk.VehicleTypeMotobike,
+    Type: sdk.DeliveryTypeDocument,
+    IsCashAccount: true,
+    Points: []sdk.DeliveryContact{pointOne, pointTwo},
+})
+```
+
+* Calculate Delivery Fee - Calculate delivery fee before delivery is made 
+```go
+pointOne := sdk.DeliveryPoint{
+    Address: "",
+    EntraceNumber: "",
+    FloorNumber: "",
+    BuildingNumber: "",
+    Remark: "",
+    Contact: sdk.DeliveryPointContact{
+        Name: "",
+        PhoneNumber: "",
+    },
+}
+
+pointTwo := sdk.DeliveryPoint{
+    Address: "",
+    EntraceNumber: "",
+    FloorNumber: "",
+    BuildingNumber: "",
+    Remark: "",
+    Contact: sdk.DeliveryPointContact{
+        Name: "",
+        PhoneNumber: "",
+    },
+}
+
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey: []byte(`---private key---`),
+    PublicKey:  []byte(`---public key---`),
+}).CalculateDeliveryFee(sdk.RequestCalculateDeliveryFee{
+    DeliveryVendor: sdk.DeliveryVendor{
+        Vendor: sdk.VendorTypeMySpeedy,
+        Credential: "",
+    },
+    VehicleType: sdk.VehicleTypeMotobike,
+    Type: sdk.DeliveryTypeDocument,
+    IsCashAccount: true,
+    Points: []sdk.DeliveryContact{pointOne, pointTwo},
+})
+```
+
+* Get Delivery - Get delivery by id
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey: []byte(`---private key---`),
+    PublicKey:  []byte(`---public key---`),
+}).GetDeliveryByID("1")
 ```
