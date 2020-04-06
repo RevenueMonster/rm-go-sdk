@@ -41,6 +41,10 @@ The golang version 1.11 and above
 - [ ] Send Notification (Merchant)
 - [x] Send Notification (Store)
 - [ ] Send Notification (User)
+- [x] Sms Sending
+- [x] Create Delivery
+- [x] Get Delivery By Id
+- [x] Calculate Delivery Fee
 
 ### Usage
 1. "sandbox" is for sandbox environment.
@@ -149,5 +153,21 @@ sdk.NewClient(sdk.Client{
     StoreID: "123123123",
     Title:   "Notification Title",
     Body:    "Notification Body",
+})
+```
+
+* Sms Sending - Send Sms To Specified Phone Number
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey: []byte(`---private key---`),
+    PublicKey:  []byte(`---public key---`),
+}).SendSms(sdk.RequestSendSms{
+    CountryCode: "60",
+    PhoneNumber: "187824152",
+    Message: "Some message",
+    Type: sdk.MessageTypeTAC,
 })
 ```
