@@ -100,8 +100,8 @@ func (c Client) GetDeliveryByID(id string) (*ResponseGetDeliveryByID, error) {
 		return nil, c.err
 	}
 
-	method := pathCreateDelivery.method
-	requestURL := c.prepareAPIURL(pathCreateDelivery)
+	method := parhGetDeliveryByID.method
+	requestURL := c.prepareAPIURL(parhGetDeliveryByID)
 	response := new(ResponseGetDeliveryByID)
 	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, id), nil, response); err != nil {
 		return nil, err

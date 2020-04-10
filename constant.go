@@ -89,5 +89,5 @@ var pathSendSms = newPath(methodPOST, "/sms")
 
 // Delivery
 var pathCreateDelivery = newPath(methodPOST, "/delivery")
-var parhGetDeliveryByID = newPath(methodGET, "/delivery/")
+var parhGetDeliveryByID = newPath(methodGET, "/delivery")
 var pathCalculateDeliveryFee = newPath(methodPOST, "/delivery/calculate")
