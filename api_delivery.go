@@ -27,17 +27,10 @@ const (
 	VehicleTypeCar      VehicleType = "CAR"
 )
 
-// VendorType :
-type VendorType string
-
-const (
-	VendorTypeMySpeedy VendorType = "MYSPEEDY"
-)
-
 // DeliveryVendor :
 type DeliveryVendor struct {
-	Vendor     VendorType `json:"vendor"`
-	Credential string     `json:"credential"`
+	Vendor     string `json:"vendor"`
+	Credential string `json:"credential"`
 }
 
 type DeliveryPoint struct {
