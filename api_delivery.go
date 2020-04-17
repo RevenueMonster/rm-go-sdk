@@ -14,6 +14,7 @@ type Delivery struct {
 // DeliveryType :
 type DeliveryType string
 
+// DeliveryType -> Type
 const (
 	DeliveryTypeDocument DeliveryType = "DOCUMENT"
 	DeliveryTypeFood     DeliveryType = "FOOD"
@@ -22,6 +23,7 @@ const (
 // VehicleType :
 type VehicleType string
 
+// Vehicle -> Type
 const (
 	VehicleTypeMotobike VehicleType = "MOTOBIKE"
 	VehicleTypeCar      VehicleType = "CAR"
@@ -29,10 +31,10 @@ const (
 
 // DeliveryVendor :
 type DeliveryVendor struct {
-	Vendor     string `json:"vendor"`
-	Credential string `json:"credential"`
+	Vendor string `json:"vendor"`
 }
 
+// DeliveryPoint :
 type DeliveryPoint struct {
 	Address        string               `json:"address"`
 	EntranceNumber string               `json:"entranceNumber"`
@@ -42,6 +44,7 @@ type DeliveryPoint struct {
 	Contact        DeliveryPointContact `json:"contact"`
 }
 
+// DeliveryPointContact :
 type DeliveryPointContact struct {
 	Name        string `json:"name"`
 	PhoneNumber string `json:"phoneNumber"`
@@ -52,7 +55,6 @@ type RequestCreateDelivery struct {
 	DeliveryVendor DeliveryVendor  `json:"deliveryVendor"`
 	VehicleType    VehicleType     `json:"vehicleType"`
 	Type           DeliveryType    `json:"type"`
-	IsCashAccount  bool            `json:"isCashAccount"`
 	Points         []DeliveryPoint `json:"points"`
 }
 
@@ -132,6 +134,36 @@ func (c Client) CalculateDeliveryFee(request RequestCalculateDeliveryFee) (*Resp
 	requestURL := c.prepareAPIURL(pathCreateDelivery)
 
 	response := new(ResponseCalculateDeliveryFee)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// RequestConfirmDelivery :
+type RequestConfirmDelivery struct {
+	DeliveryID string `json:"deliveryId"`
+	CheckoutID string `json:"checkoutId"`
+}
+
+// ResponseConfirmDelivery :
+type ResponseConfirmDelivery struct {
+	Code string   `json:"code"`
+	Item Delivery `json:"item"`
+	Err  *Error   `json:"error"`
+}
+
+// ConfirmDelivery :
+func (c Client) ConfirmDelivery(request RequestConfirmDelivery) (*ResponseConfirmDelivery, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathConfirmDelivery.method
+	requestURL := c.prepareAPIURL(pathConfirmDelivery)
+
+	response := new(ResponseConfirmDelivery)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
 	}

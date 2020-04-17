@@ -206,7 +206,7 @@ sdk.NewClient(sdk.Client{
     PublicKey:  []byte(`---public key---`),
 }).CreateDelivery(sdk.RequestCreateDelivery{
     DeliveryVendor: sdk.DeliveryVendor{
-        Vendor: sdk.VendorTypeMySpeedy,
+        Vendor: sdk.VendorTypeMrSpeedy,
         Credential: "",
     },
     VehicleType: sdk.VehicleTypeMotobike,
@@ -250,7 +250,7 @@ sdk.NewClient(sdk.Client{
     PublicKey:  []byte(`---public key---`),
 }).CalculateDeliveryFee(sdk.RequestCalculateDeliveryFee{
     DeliveryVendor: sdk.DeliveryVendor{
-        Vendor: sdk.VendorTypeMySpeedy,
+        Vendor: sdk.VendorTypeMrSpeedy,
         Credential: "",
     },
     VehicleType: sdk.VehicleTypeMotobike,
