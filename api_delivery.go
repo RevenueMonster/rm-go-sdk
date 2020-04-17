@@ -110,7 +110,6 @@ type RequestCalculateDeliveryFee struct {
 	DeliveryVendor DeliveryVendor  `json:"deliveryVendor"`
 	VehicleType    VehicleType     `json:"vehicleType"`
 	Type           DeliveryType    `json:"type"`
-	IsCashAccount  bool            `json:"isCashAccount"`
 	Points         []DeliveryPoint `json:"points"`
 }
 
