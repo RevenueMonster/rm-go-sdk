@@ -5,6 +5,13 @@ import (
 	"fmt"
 )
 
+// RequestExtraInfoExtraFee :
+type RequestExtraInfoExtraFee struct {
+	Type        string `json:"type"`
+	ReferenceID string `json:"referenceId"`
+	Amount      uint64 `json:"amount"`
+}
+
 // RequestCreatePaymentCheckout :
 type RequestCreatePaymentCheckout struct {
 	Order struct {
@@ -21,6 +28,9 @@ type RequestCreatePaymentCheckout struct {
 	RedirectURL   string   `json:"redirectUrl"`
 	NotifyURL     string   `json:"notifyUrl"`
 	LayoutVersion string   `json:"layoutVersion"`
+	ExtraInfo     struct {
+		ExtraFee []RequestExtraInfoExtraFee `json:"extraFee"`
+	} `json:"extraInfo"`
 }
 
 // ResponseCreatePaymentCheckout :
