@@ -4,9 +4,14 @@ import "fmt"
 
 // RequestPushNotificationToStore :
 type RequestPushNotificationToStore struct {
-	StoreID string
+	StoreID string `json:"-"`
 	Title   string `json:"title"`
 	Body    string `json:"body"`
+	Event   struct {
+		Type        string `json:"type"`
+		ReferenceID string `json:"referenceId"`
+		Data        string `json:"data"`
+	} `json:"event"`
 }
 
 // ResponsePushNotificationToStore :
