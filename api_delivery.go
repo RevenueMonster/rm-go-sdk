@@ -4,11 +4,23 @@ import "fmt"
 
 // Delivery :
 type Delivery struct {
-	DeliveryID       string `json:"deliveryId"`
-	DeliveryVendorID string `json:"deliveryVendorId"`
-	CurrencyType     string `json:"currencyType"`
-	Amount           uint64 `json:"amount"`
-	Status           string `json:"status"`
+	DeliveryID       string   `json:"deliveryId"`
+	DeliveryVendorID string   `json:"deliveryVendorId"`
+	CurrencyType     string   `json:"currencyType"`
+	Amount           uint64   `json:"amount"`
+	Status           string   `json:"status"`
+	Courier          *Courier `json:"courier"`
+}
+
+// Courier :
+type Courier struct {
+	ID        string  `json:"id"`
+	Surname   string  `json:"surname"`
+	Name      string  `json:"name"`
+	Phone     string  `json:"phone"`
+	PhotoURL  string  `json:"photoUrl"`
+	Latitude  float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
 }
 
 // DeliveryType :
