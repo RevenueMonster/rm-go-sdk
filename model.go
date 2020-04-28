@@ -108,7 +108,7 @@ type Merchant struct {
 	BusinessScope      string    `json:"businessScope"`
 	SourceOfFunds      string    `json:"sourceOfFunds"`
 	CustomerOrigin     string    `json:"customerOrigin"`
-	WebsiteUrl         string    `json:"websiteUrl"`
+	WebsiteURL         string    `json:"websiteUrl"`
 	EstablishedAt      time.Time `json:"establishedAt"`
 	CountryCode        string    `json:"countryCode"`
 	PhoneNumber        string    `json:"phoneNumber"`

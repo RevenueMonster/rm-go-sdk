@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// SendEventRequest :
 type SendEventRequest struct {
 	ReferenceID string `json:"referenceId"`
 	Platform    string `json:"platform"`
@@ -13,11 +14,13 @@ type SendEventRequest struct {
 	Body        string `json:"body"`
 }
 
+// SendEventRequestResponse :
 type SendEventRequestResponse struct {
 	Code string `json:"code"`
 	Err  *Error `json:"error"`
 }
 
+// SendEvent :
 func (c Client) SendEvent(req SendEventRequest) (*SendEventRequestResponse, error) {
 	if c.err != nil {
 		return nil, c.err

@@ -3,6 +3,7 @@ package sdk
 // SmsType :
 type SmsType string
 
+// SMS -> Type :
 const (
 	SmsTypeTAC SmsType = "TAC"
 )
