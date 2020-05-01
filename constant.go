@@ -92,6 +92,7 @@ var pathCreateDelivery = newPath(methodPOST, "/delivery")
 var parhGetDeliveryByID = newPath(methodGET, "/delivery")
 var pathCalculateDeliveryFee = newPath(methodPOST, "/delivery/calculate")
 var pathConfirmDelivery = newPath(methodPOST, "/delivery/confirm")
+var pathCancelDelivery = newPath(methodPOST, "/delivery/cancel")
 
 // Voucher
 var pathAPIVoucherVoidURL = newPath(methodPOST, "/voucher")

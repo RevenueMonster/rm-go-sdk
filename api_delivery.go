@@ -181,3 +181,32 @@ func (c Client) ConfirmDelivery(request RequestConfirmDelivery) (*ResponseConfir
 
 	return response, nil
 }
+
+// RequestCancelDelivery :
+type RequestCancelDelivery struct {
+	DeliveryID string `json:"deliveryId"`
+}
+
+// ResponseCancelDelivery :
+type ResponseCancelDelivery struct {
+	Code string   `json:"code"`
+	Item Delivery `json:"item"`
+	Err  *Error   `json:"error"`
+}
+
+// CancelDelivery :
+func (c Client) CancelDelivery(request RequestCancelDelivery) (*ResponseCancelDelivery, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathCancelDelivery.method
+	requestURL := c.prepareAPIURL(pathConfirmDelivery)
+
+	response := new(ResponseCancelDelivery)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
