@@ -201,7 +201,7 @@ func (c Client) CancelDelivery(request RequestCancelDelivery) (*ResponseCancelDe
 	}
 
 	method := pathCancelDelivery.method
-	requestURL := c.prepareAPIURL(pathConfirmDelivery)
+	requestURL := c.prepareAPIURL(pathCancelDelivery)
 
 	response := new(ResponseCancelDelivery)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
