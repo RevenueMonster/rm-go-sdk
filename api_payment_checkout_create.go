@@ -10,6 +10,7 @@ type RequestExtraInfoExtraFee struct {
 	Type        string `json:"type"`
 	ReferenceID string `json:"referenceId"`
 	Amount      uint64 `json:"amount"`
+	Source      string `json:"source"`
 }
 
 // RequestCreatePaymentCheckout :
