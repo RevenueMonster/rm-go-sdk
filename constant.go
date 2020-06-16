@@ -63,6 +63,7 @@ var pathAPIReversedPaymentURL = newPath(methodPOST, "/payment/reverse")
 
 // Stores Endpoint
 var pathAPIGetStoresURL = newPath(methodGET, "/stores")
+var pathAPIGetStoreByIDURL = newPath(methodGET, "/store")
 
 // Merchant Information
 var pathAPIGetMerchantURL = newPath(methodGET, "/merchant")

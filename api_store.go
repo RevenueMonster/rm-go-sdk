@@ -36,3 +36,35 @@ func (c Client) GetStores(cursor string) (*ResponseStoreItems, error) {
 
 	return response, nil
 }
+
+// ResponseStoreItem :
+type ResponseStoreItem struct {
+	Item Store  `json:"item"`
+	Code string `json:"code"`
+	Meta struct {
+		Count  int    `json:"count"`
+		Cursor string `json:"cursor"`
+	} `json:"meta"`
+	Err *Error `json:"error"`
+}
+
+// GetStoreByID :
+func (c Client) GetStoreByID(storeID string) (*ResponseStoreItem, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathAPIGetStoreByIDURL.method
+	requestURL := c.prepareAPIURL(pathAPIGetStoreByIDURL)
+
+	response := new(ResponseStoreItem)
+	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, storeID), nil, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
