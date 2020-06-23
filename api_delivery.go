@@ -49,11 +49,17 @@ type DeliveryVendor struct {
 // DeliveryPoint :
 type DeliveryPoint struct {
 	Address        string               `json:"address"`
+	Postcode       string               `json:"postcode"`
+	City           string               `json:"city"`
+	State          string               `json:"state"`
+	Country        string               `json:"country"`
 	EntranceNumber string               `json:"entranceNumber"`
 	FloorNumber    string               `json:"floorNumber"`
 	BuildingNumber string               `json:"buildingNumber"`
 	Remark         string               `json:"remark"`
 	Contact        DeliveryPointContact `json:"contact"`
+	Latitude       float64              `json:"latitude"`
+	Longitude      float64              `json:"longitude"`
 }
 
 // DeliveryPointContact :
