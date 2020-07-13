@@ -5,13 +5,20 @@ import (
 	"fmt"
 )
 
+// Notification :
+type Notification struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+}
+
 // SendEventRequest :
 type SendEventRequest struct {
-	ReferenceID string `json:"referenceId"`
-	Platform    string `json:"platform"`
-	Channel     string `json:"channel"`
-	Action      string `json:"action"`
-	Body        string `json:"body"`
+	ReferenceID  string       `json:"referenceId"`
+	Platform     string       `json:"platform"`
+	Channel      string       `json:"channel"`
+	Action       string       `json:"action"`
+	Notification Notification `json:"notification"`
+	Body         string       `json:"body"`
 }
 
 // SendEventRequestResponse :
