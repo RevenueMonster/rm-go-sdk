@@ -55,3 +55,34 @@ func (c Client) SendEvent(req SendEventRequest) (*SendEventRequestResponse, erro
 
 	return response, nil
 }
+
+// SendEventByStoreRequest :
+type SendEventByStoreRequest struct {
+	StoreID      string       `json:"-"`
+	Platform     string       `json:"platform"`
+	Channel      string       `json:"channel"`
+	Action       string       `json:"action"`
+	Notification Notification `json:"notification"`
+	Body         string       `json:"body"`
+}
+
+// SendEventByStore :
+func (c Client) SendEventByStore(req SendEventByStoreRequest) (*SendEventRequestResponse, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathAPIPostSendEventByStoreURL.method
+	requestURL := c.prepareAPIURL(pathAPIPostSendEventByStoreURL)
+
+	response := new(SendEventRequestResponse)
+	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, req.StoreID), req, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
