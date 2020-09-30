@@ -13,6 +13,14 @@ type RequestExtraInfoExtraFee struct {
 	Source      string `json:"source"`
 }
 
+// RequestCustomer :
+type RequestCustomer struct {
+	UserID      string `json:"userId"`
+	Email       string `json:"email" validate:"omitempty,email"`
+	CountryCode string `json:"countryCode"`
+	PhoneNumber string `json:"phoneNumber"`
+}
+
 // RequestCreatePaymentCheckout :
 type RequestCreatePaymentCheckout struct {
 	Order struct {
@@ -32,12 +40,7 @@ type RequestCreatePaymentCheckout struct {
 	ExtraInfo     struct {
 		ExtraFee []RequestExtraInfoExtraFee `json:"extraFee"`
 	} `json:"extraInfo"`
-	Customer struct {
-		UserID      string `json:"userId"`
-		Email       string `json:"email" validate:"omitempty,email"`
-		CountryCode string `json:"countryCode"`
-		PhoneNumber string `json:"phoneNumber"`
-	} `json:"customer"`
+	Customer RequestCustomer `json:"customer"`
 }
 
 // ResponseCreatePaymentCheckout :
