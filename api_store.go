@@ -3,7 +3,15 @@ package sdk
 import (
 	"errors"
 	"fmt"
+	"net/url"
+	"time"
 )
+
+// RequestGetStores :
+type RequestGetStores struct {
+	Cursor        string    `json:"cursor"`
+	LastUpdatedBy time.Time `json:"lastUpdatedBy"`
+}
 
 // ResponseStoreItems :
 type ResponseStoreItems struct {
@@ -17,7 +25,7 @@ type ResponseStoreItems struct {
 }
 
 // GetStores :
-func (c Client) GetStores(cursor string) (*ResponseStoreItems, error) {
+func (c Client) GetStores(request RequestGetStores) (*ResponseStoreItems, error) {
 	if c.err != nil {
 		return nil, c.err
 	}
@@ -25,8 +33,20 @@ func (c Client) GetStores(cursor string) (*ResponseStoreItems, error) {
 	method := pathAPIGetStoresURL.method
 	requestURL := c.prepareAPIURL(pathAPIGetStoresURL)
 
+	rawURL, err := url.Parse(requestURL)
+	if err != nil {
+		return nil, err
+	}
+
+	parameters := url.Values{}
+	parameters.Add("cursor", request.Cursor)
+	if !request.LastUpdatedBy.IsZero() {
+		parameters.Add("filter", "{\"updatedAt\": {\"$gte\": \""+request.LastUpdatedBy.Format(time.RFC3339)+"\"}}")
+	}
+	rawURL.RawQuery = parameters.Encode()
+
 	response := new(ResponseStoreItems)
-	if err := c.httpAPI(method, fmt.Sprintf("%s?cursor=%s", requestURL, cursor), nil, response); err != nil {
+	if err := c.httpAPI(method, rawURL.String(), nil, response); err != nil {
 		return nil, err
 	}
 
