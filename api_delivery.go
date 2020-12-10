@@ -147,8 +147,8 @@ func (c Client) CalculateDeliveryFee(request RequestCalculateDeliveryFee) (*Resp
 		return nil, c.err
 	}
 
-	method := pathCreateDelivery.method
-	requestURL := c.prepareAPIURL(pathCreateDelivery)
+	method := pathCalculateDeliveryFee.method
+	requestURL := c.prepareAPIURL(pathCalculateDeliveryFee)
 
 	response := new(ResponseCalculateDeliveryFee)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
