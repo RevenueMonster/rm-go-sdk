@@ -14,6 +14,9 @@ const (
 	ScopeGetMerchantProfile      string = "get_merchant_profile"
 	ScopeGetUserProfile          string = "get_user_profile"
 	ScopeGetMerchantSubscription string = "get_merchant_subscription"
+	ScopeManageLoyalty           string = "manage_loyalty"
+	ScopeManageLoyaltyVoucher    string = "manage_loyalty_voucher"
+	ScopeManageLoyaltyMember     string = "manage_loyalty_member"
 )
 
 // private function
