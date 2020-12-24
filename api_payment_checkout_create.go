@@ -41,6 +41,10 @@ type RequestCreatePaymentCheckout struct {
 		ExtraFee []RequestExtraInfoExtraFee `json:"extraFee"`
 	} `json:"extraInfo"`
 	Customer RequestCustomer `json:"customer"`
+	Voucher  struct {
+		Code string `json:"code"`
+	} `json:"voucher"`
+	Source string `json:"source"`
 }
 
 // ResponseCreatePaymentCheckout :

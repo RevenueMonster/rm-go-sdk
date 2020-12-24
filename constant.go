@@ -101,6 +101,7 @@ var pathCancelDelivery = newPath(methodPOST, "/delivery/cancel")
 
 // Voucher
 var pathAPIVoucherVoidURL = newPath(methodPOST, "/voucher")
+var pathAPIGetVoucherByCodeURL = newPath(methodGET, "/voucher")
 
 // Service
 var pathAPIServiceWebhookURL = newPath(methodPOST, "/service/webhook")
