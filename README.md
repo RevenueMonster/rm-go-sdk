@@ -17,7 +17,7 @@ The golang version 1.11 and above
 - [ ] Create Store
 - [ ] Update Store
 - [ ] Delete Store
-- [ ] Get User Profile
+- [x] Get User Profile
 - [x] Payment (Transaction QR) - Create Transaction QRCode/URL
 - [] Payment (Transaction QR) - Get Transaction QRCode/URL
 - [x] Payment (Transaction QR) - Get Transaction QRCode/URL By Code
