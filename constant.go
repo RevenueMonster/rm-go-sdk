@@ -71,6 +71,9 @@ var pathAPIGetStoreByIDURL = newPath(methodGET, "/store")
 // Merchant Information
 var pathAPIGetMerchantURL = newPath(methodGET, "/merchant")
 
+// User Information
+var pathAPIGetUserURL = newPath(methodGET, "/user")
+
 // WeChat
 var pathAPIGetRMWeChatUserOAuthURL = newPath(methodPOST, "/socialmedia/rm/wechat-oauth/url")
 var pathAPIGetRMWeChatUserInfoByCodeURL = newPath(methodPOST, "/socialmedia/rm/wechat-oauth/code")

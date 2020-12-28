@@ -157,3 +157,19 @@ type Store struct {
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 }
+
+// User :
+type User struct {
+	ID          string    `json:"id"`
+	FirstName   string    `json:"firstName"`
+	LastName    string    `json:"lastName"`
+	CountryCode string    `json:"countryCode"`
+	PhoneNumber string    `json:"phoneNumber"`
+	Email       string    `json:"email"`
+	AvatarURL   string    `json:"avatarUrl"`
+	Status      string    `json:"status"`
+	StoreID     string    `json:"storeId"`
+	IsActive    bool      `json:"isActive"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+}
