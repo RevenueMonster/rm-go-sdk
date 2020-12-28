@@ -35,7 +35,7 @@ The golang version 1.11 and above
 - [ ] Get Loyalty Member Point History
 - [ ] Issue Voucher
 - [ ] Void Voucher
-- [ ] Get Voucher By Code
+- [x] Get Voucher By Code
 - [ ] Get Voucher Batches
 - [ ] Get Voucher Batch By Key
 - [ ] Send Notification (Merchant)
