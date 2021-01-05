@@ -173,3 +173,57 @@ type User struct {
 	CreatedAt   time.Time `json:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt"`
 }
+
+// Voucher :
+type Voucher struct {
+	Key                string    `json:"key"`
+	Label              string    `json:"label"`
+	VoucherBatchKey    string    `json:"voucherBatchKey"`
+	Type               string    `json:"type"`
+	Amount             int       `json:"amount"`
+	DiscountRate       int       `json:"discountRate"`
+	MinimumSpendAmount int       `json:"minimumSpendAmount"`
+	Origin             string    `json:"origin"`
+	ImageURL           string    `json:"imageUrl"`
+	AssignedAt         time.Time `json:"assignedAt"`
+	QrURL              string    `json:"qrUrl"`
+	Code               string    `json:"code"`
+	IsShipping         bool      `json:"isShipping"`
+	Address            string    `json:"address"`
+	Expiry             struct {
+		Type      string    `json:"type"`
+		Day       int       `json:"day"`
+		ExpiredAt time.Time `json:"expiredAt"`
+	} `json:"expiry"`
+	UsedAt         time.Time `json:"usedAt"`
+	RedeemedAt     time.Time `json:"redeemedAt"`
+	IsDeviceRedeem bool      `json:"isDeviceRedeem"`
+	Status         string    `json:"status"`
+	CreatedAt      time.Time `json:"createdAt"`
+	UpdatedAt      time.Time `json:"updatedAt"`
+}
+
+// VoucherBatch :
+type VoucherBatch struct {
+	ID              string `json:"id"`
+	Key             string `json:"key"`
+	Label           string `json:"label"`
+	Type            string `json:"type"`
+	Amount          int    `json:"amount"`
+	DiscountRate    int    `json:"discountRate"`
+	ImageURL        string `json:"imageUrl"`
+	Quantity        int    `json:"quantity"`
+	BalanceQuantity int    `json:"balanceQuantity"`
+	UsedQuantity    int    `json:"usedQuantity"`
+	Expiry          struct {
+		Type      string    `json:"type"`
+		Day       int       `json:"day"`
+		ExpiredAt time.Time `json:"expiredAt"`
+	} `json:"expiry"`
+	Origin         string    `json:"origin"`
+	IsShipping     bool      `json:"isShipping"`
+	Reason         string    `json:"reason"`
+	IsDeviceRedeem bool      `json:"isDeviceRedeem"`
+	CreatedAt      time.Time `json:"createdAt"`
+	UpdatedAt      time.Time `json:"updatedAt"`
+}
