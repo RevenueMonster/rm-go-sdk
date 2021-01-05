@@ -36,8 +36,8 @@ The golang version 1.11 and above
 - [ ] Issue Voucher
 - [ ] Void Voucher
 - [x] Get Voucher By Code
-- [ ] Get Voucher Batches
-- [ ] Get Voucher Batch By Key
+- [x] Get Voucher Batches
+- [x] Get Voucher Batch By Key
 - [ ] Send Notification (Merchant)
 - [x] Send Notification (Store)
 - [ ] Send Notification (User)
