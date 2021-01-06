@@ -13,6 +13,14 @@ type RequestExtraInfoExtraFee struct {
 	Source      string `json:"source"`
 }
 
+// RequestAmountBreakdown :
+type RequestAmountBreakdown struct {
+	Type              string `json:"type"`
+	IsDiscountAllowed bool   `json:"isDiscountAllowed"`
+	Label             string `json:"label"`
+	Amount            uint64 `json:"amount"`
+}
+
 // RequestCustomer :
 type RequestCustomer struct {
 	UserID      string `json:"userId"`
@@ -24,12 +32,13 @@ type RequestCustomer struct {
 // RequestCreatePaymentCheckout :
 type RequestCreatePaymentCheckout struct {
 	Order struct {
-		ID             string `json:"id"`
-		Title          string `json:"title"`
-		Detail         string `json:"detail"`
-		AdditionalData string `json:"additionalData"`
-		CurrencyType   string `json:"currencyType"`
-		Amount         uint64 `json:"amount"`
+		ID              string                   `json:"id"`
+		Title           string                   `json:"title"`
+		Detail          string                   `json:"detail"`
+		AdditionalData  string                   `json:"additionalData"`
+		CurrencyType    string                   `json:"currencyType"`
+		Amount          uint64                   `json:"amount"`
+		AmountBreakdown []RequestAmountBreakdown `json:"amountBreakdown"`
 	} `json:"order"`
 	Method        []string `json:"method"`
 	Type          string   `json:"type"`
