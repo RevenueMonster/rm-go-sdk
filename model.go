@@ -214,24 +214,27 @@ type Voucher struct {
 
 // VoucherBatch :
 type VoucherBatch struct {
-	ID              string `json:"id"`
-	Key             string `json:"key"`
-	Label           string `json:"label"`
-	Type            string `json:"type"`
-	Amount          int    `json:"amount"`
-	DiscountRate    int    `json:"discountRate"`
-	ImageURL        string `json:"imageUrl"`
-	Quantity        int    `json:"quantity"`
-	BalanceQuantity int    `json:"balanceQuantity"`
-	UsedQuantity    int    `json:"usedQuantity"`
-	Expiry          struct {
+	ID                 string `json:"id"`
+	Key                string `json:"key"`
+	Label              string `json:"label"`
+	Type               string `json:"type"`
+	Amount             int    `json:"amount"`
+	DiscountRate       int    `json:"discountRate"`
+	MinimumSpendAmount int    `json:"minimumSpendAmount"`
+	ImageURL           string `json:"imageUrl"`
+	Quantity           int    `json:"quantity"`
+	BalanceQuantity    int    `json:"balanceQuantity"`
+	UsedQuantity       int    `json:"usedQuantity"`
+	Status             string `json:"status"`
+	Expiry             struct {
 		Type      string    `json:"type"`
 		Day       int       `json:"day"`
 		ExpiredAt time.Time `json:"expiredAt"`
 	} `json:"expiry"`
 	Origin         string    `json:"origin"`
 	IsShipping     bool      `json:"isShipping"`
-	Reason         string    `json:"reason"`
+	IsStatic       bool      `json:"isStatic"`
+	StaticCode     string    `json:"staticCode"`
 	IsDeviceRedeem bool      `json:"isDeviceRedeem"`
 	CreatedAt      time.Time `json:"createdAt"`
 	UpdatedAt      time.Time `json:"updatedAt"`
