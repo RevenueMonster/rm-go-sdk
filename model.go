@@ -137,6 +137,15 @@ type Merchant struct {
 	UpdatedAt        time.Time `json:"updatedAt"`
 }
 
+// MerchantSubscription :
+type MerchantSubscription struct {
+	ID          uint64    `json:"id"`
+	GracePeriod uint64    `json:"gracePeriod"`
+	ExpiryAt    time.Time `json:"expiryAt"`
+	TerminateAt time.Time `json:"terminateAt"`
+	Status      string    `json:"status"`
+}
+
 // Store :
 type Store struct {
 	ID           string `json:"id"`
