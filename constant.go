@@ -45,6 +45,7 @@ const sandboxOAuthURL = "https://sb-oauth.revenuemonster.my"
 // Path
 // Oauth path
 var pathOAuthPathTokenURL = newPath(methodPOST, "/token")
+var pathOAuthPathTokenInfoURL = newPath(methodPOST, "/token-info")
 
 // API path
 
@@ -70,6 +71,7 @@ var pathAPIGetStoreByIDURL = newPath(methodGET, "/store")
 
 // Merchant Information
 var pathAPIGetMerchantURL = newPath(methodGET, "/merchant")
+var pathAPIGetMerchantSubscriptionsURL = newPath(methodGET, "/merchant/subscriptions")
 
 // User Information
 var pathAPIGetUserURL = newPath(methodGET, "/user")

@@ -11,7 +11,7 @@ The golang version 1.11 and above
 - [x] Client Credentials (Authentication)
 - [x] Refresh Token (Authentication)
 - [ ] Get Merchant Profile
-- [ ] Get Merchant Subscriptions
+- [x] Get Merchant Subscriptions
 - [x] Get Stores
 - [ ] Get Stores By ID
 - [ ] Create Store
