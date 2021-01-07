@@ -1,6 +1,7 @@
 package sdk
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/url"
@@ -70,9 +71,9 @@ type GetVoucherBatchByKeyResponse struct {
 
 // RequestGetVoucherBatches :
 type RequestGetVoucherBatches struct {
-	Status          string `json:"status"`
-	BalanceQuantity int    `json:"balanceQuantity"`
-	Cursor          string `json:"cursor"`
+	Status   string `json:"status"`
+	IsStatic bool   `json:"isStatic"`
+	Cursor   string `json:"cursor"`
 }
 
 // GetVoucherBatchesResponse :
@@ -140,14 +141,24 @@ func (c Client) GetVoucherBatches(request RequestGetVoucherBatches) (*GetVoucher
 
 	parameters := url.Values{}
 	parameters.Add("cursor", request.Cursor)
-	if request.Status != "" {
-		parameters.Add("filter", "{\"status\": \""+request.Status+"\"}")
-	}
-	if request.BalanceQuantity > 0 {
-		parameters.Add("filter", "{\"balanceQuantity\": {\"$gte\": \""+fmt.Sprintf("%d", request.BalanceQuantity)+"\"}}")
-	}
-	rawURL.RawQuery = parameters.Encode()
 
+	type Filter struct {
+		Status   string `json:"status,omitempty"`
+		IsStatic bool   `json:"isStatic,omitempty"`
+	}
+
+	filter := new(Filter)
+	if request.Status != "" {
+		filter.Status = request.Status
+	}
+
+	if request.IsStatic {
+		filter.IsStatic = true
+	}
+
+	data, _ := json.Marshal(filter)
+	parameters.Add("filter", string(data))
+	rawURL.RawQuery = parameters.Encode()
 	response := new(GetVoucherBatchesResponse)
 	if err := c.httpAPI(method, rawURL.String(), nil, response); err != nil {
 		return nil, err
