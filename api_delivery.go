@@ -190,7 +190,8 @@ func (c Client) ConfirmDelivery(request RequestConfirmDelivery) (*ResponseConfir
 
 // RequestCancelDelivery :
 type RequestCancelDelivery struct {
-	DeliveryID string `json:"deliveryId"`
+	DeliveryID   string `json:"deliveryId"`
+	RefundAmount uint64 `json:"refundAmount"`
 }
 
 // ResponseCancelDelivery :
