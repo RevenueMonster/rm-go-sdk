@@ -17,6 +17,7 @@ type RequestCreatePaymentCheckoutByMethod struct {
 type ResponseCreatePaymentCheckoutByMethod struct {
 	Item struct {
 		URL    string `json:"url"`
+		Data   string `json:"data"`
 		QRCode struct {
 			Data        string `json:"data"`
 			Base64Image string `json:"base64Image"`
