@@ -118,7 +118,7 @@ func (c Client) GetVoucherByCode(code string) (*GetVoucherByCodeResponse, error)
 	requestURL := c.prepareAPIURL(pathAPIGetVoucherByCodeURL)
 
 	response := new(GetVoucherByCodeResponse)
-	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, code), nil, response); err != nil {
+	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, url.QueryEscape(code)), nil, response); err != nil {
 		return nil, err
 	}
 
