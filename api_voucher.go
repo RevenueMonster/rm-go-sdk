@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
+	"strings"
 	"time"
 )
 
@@ -114,11 +115,13 @@ func (c Client) GetVoucherByCode(code string) (*GetVoucherByCodeResponse, error)
 		return nil, c.err
 	}
 
+	code = strings.Replace(code, "#", "%23", -1)
+
 	method := pathAPIGetVoucherByCodeURL.method
 	requestURL := c.prepareAPIURL(pathAPIGetVoucherByCodeURL)
 
 	response := new(GetVoucherByCodeResponse)
-	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, url.QueryEscape(code)), nil, response); err != nil {
+	if err := c.httpAPI(method, fmt.Sprintf("%s/%s", requestURL, code), nil, response); err != nil {
 		return nil, err
 	}
 
