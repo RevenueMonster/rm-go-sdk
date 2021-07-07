@@ -21,6 +21,14 @@ type RequestAmountBreakdown struct {
 	Amount            uint64 `json:"amount"`
 }
 
+// RequestInHousePromo :
+type RequestInHousePromo struct {
+	Label    string `json:"label"`
+	UniqueID string `json:"uniqueId"`
+	Source   string `json:"source"`
+	Amount   uint64 `json:"amount"`
+}
+
 // RequestCustomer :
 type RequestCustomer struct {
 	UserID      string `json:"userId"`
@@ -41,6 +49,7 @@ type RequestCreatePaymentCheckout struct {
 		AmountBreakdown []RequestAmountBreakdown `json:"amountBreakdown"`
 	} `json:"order"`
 	Method        []string `json:"method"`
+	ExcludeMethod []string `json:"excludeMethod"`
 	Type          string   `json:"type"`
 	StoreID       string   `json:"storeId"`
 	RedirectURL   string   `json:"redirectUrl"`
@@ -53,7 +62,8 @@ type RequestCreatePaymentCheckout struct {
 	Voucher  struct {
 		Code string `json:"code"`
 	} `json:"voucher"`
-	Source string `json:"source"`
+	Source       string                `json:"source"`
+	InHousePromo []RequestInHousePromo `json:"inHousePromo"`
 }
 
 // ResponseCreatePaymentCheckout :
