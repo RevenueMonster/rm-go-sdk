@@ -49,6 +49,7 @@ type RequestCreatePaymentCheckout struct {
 		AmountBreakdown []RequestAmountBreakdown `json:"amountBreakdown"`
 	} `json:"order"`
 	Method        []string `json:"method"`
+	ExcludeMethod []string `json:"excludeMethod"`
 	Type          string   `json:"type"`
 	StoreID       string   `json:"storeId"`
 	RedirectURL   string   `json:"redirectUrl"`
