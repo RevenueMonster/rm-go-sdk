@@ -114,4 +114,5 @@ var pathAPIGetVoucherBatchesURL = newPath(methodGET, "/voucher-batches")
 var pathAPIGetVoucherBatchByKeyURL = newPath(methodGET, "/voucher-batch")
 
 // Service
+var pathAPIService = newPath(methodPOST, "/service")
 var pathAPIServiceWebhookURL = newPath(methodPOST, "/service/webhook")
