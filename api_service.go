@@ -1,5 +1,7 @@
 package sdk
 
+import "encoding/json"
+
 // RequestServiceWebhook :
 type RequestServiceWebhook struct {
 	Function string `json:"function"`
@@ -24,7 +26,12 @@ type RequestService struct {
 }
 
 // ResponseService :
-type ResponseService interface{}
+type ResponseService struct {
+	Code  string          `json:"code"`
+	Item  json.RawMessage `json:"item"`
+	Items json.RawMessage `json:"items"`
+	Err   *Error          `json:"error"`
+}
 
 // ServiceWebhook :
 func (c Client) ServiceWebhook(request RequestServiceWebhook) (*ResponseServiceWebhook, error) {
