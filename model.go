@@ -96,8 +96,8 @@ type PaymentTransaction struct {
 		ExtraFee []struct {
 			Type            string `json:"type"`
 			ReferenceId     string `json:"referenceId"`
-			Amount          string `json:"amount"`
-			IsRefundAllowed string `json:"isRefundAllowed"`
+			Amount          uint   `json:"amount"`
+			IsRefundAllowed bool   `json:"isRefundAllowed"`
 		} `json:"extraInfo"`
 	} `json:"extraFee"`
 
