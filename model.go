@@ -92,8 +92,17 @@ type PaymentTransaction struct {
 	Type          string    `json:"type"`
 	Status        string    `json:"status"`
 	Region        string    `json:"region"`
-	CreatedAt     time.Time `json:"createdAt"`
-	UpdatedAt     time.Time `json:"updatedAt"`
+	ExtraInfo     struct {
+		ExtraFee []struct {
+			Type            string `json:"type"`
+			ReferenceId     string `json:"referenceId"`
+			Amount          string `json:"amount"`
+			IsRefundAllowed string `json:"isRefundAllowed"`
+		} `json:"extraInfo"`
+	} `json:"extraFee"`
+
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 // Merchant :
