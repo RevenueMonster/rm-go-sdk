@@ -98,8 +98,8 @@ type PaymentTransaction struct {
 			ReferenceId     string `json:"referenceId"`
 			Amount          uint   `json:"amount"`
 			IsRefundAllowed bool   `json:"isRefundAllowed"`
-		} `json:"extraInfo"`
-	} `json:"extraFee"`
+		} `json:"extraFee"`
+	} `json:"extraInfo"`
 
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
