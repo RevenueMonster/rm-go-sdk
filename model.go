@@ -98,6 +98,9 @@ type PaymentTransaction struct {
 			ReferenceId     string `json:"referenceId"`
 			Amount          uint   `json:"amount"`
 			IsRefundAllowed bool   `json:"isRefundAllowed"`
+			FeeType         string `json:"feeType"`
+			FeeValue        string `json:"feeValue"`
+			IsIncludedMDR   bool   `json:"isIncludedMDR"`
 		} `json:"extraFee"`
 	} `json:"extraInfo"`
 
