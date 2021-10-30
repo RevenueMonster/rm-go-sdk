@@ -99,7 +99,7 @@ type PaymentTransaction struct {
 			Amount          uint   `json:"amount"`
 			IsRefundAllowed bool   `json:"isRefundAllowed"`
 			FeeType         string `json:"feeType"`
-			FeeValue        string `json:"feeValue"`
+			FeeValue        uint   `json:"feeValue"`
 			IsIncludedMDR   bool   `json:"isIncludedMDR"`
 		} `json:"extraFee"`
 	} `json:"extraInfo"`
