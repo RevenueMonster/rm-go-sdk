@@ -82,6 +82,7 @@ type RequestCreateDelivery struct {
 	Points             []DeliveryPoint `json:"points"`
 	PreviousDeliveryID string          `json:"previousDeliveryID"`
 	TransactionID      string          `json:"transactionID"`
+	StoreID            string          `json:"storeID"`
 }
 
 // ResponseCreateDelivery :
