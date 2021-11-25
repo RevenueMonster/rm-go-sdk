@@ -138,6 +138,7 @@ type RequestCalculateDeliveryFee struct {
 	VehicleType    VehicleType     `json:"vehicleType"`
 	Type           DeliveryType    `json:"type"`
 	Points         []DeliveryPoint `json:"points"`
+	StoreID        string          `json:"storeID"`
 }
 
 // ResponseCalculateDeliveryFee :
