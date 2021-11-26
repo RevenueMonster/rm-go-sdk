@@ -45,6 +45,9 @@ The golang version 1.11 and above
 - [x] Create Delivery
 - [x] Get Delivery By Id
 - [x] Calculate Delivery Fee
+- [x] Ekyc - MyKad Recognition
+- [x] EKyc - Face Comparison
+- [x] Ekyc - Liveness Verification
 
 ### Usage
 1. "sandbox" is for sandbox environment.
@@ -269,4 +272,45 @@ sdk.NewClient(sdk.Client{
     PrivateKey: []byte(`---private key---`),
     PublicKey:  []byte(`---public key---`),
 }).GetDeliveryByID("1")
+```
+
+* Ekyc - MyKad Recognition
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey:  []byte(`---private key---`),
+    AccessToken: `access token`,
+}).EkycMyKad(sdk.RequestEkycMykad{
+    Image: `base64 image`, // an image that contains MyKad
+})
+```
+
+* Ekyc - Face Comparison
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey:  []byte(`---private key---`),
+    AccessToken: `access token`,
+}).EkycMyKad(sdk.RequestEkycFaceCompare{
+    Image1: `base64 image`, // an image that contains a face
+    Image2: `base64 image`, // an image that contains a face
+})
+```
+
+* Ekyc - Liveness Verification
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey:  []byte(`---private key---`),
+    AccessToken: `access token`,
+}).EkycLiveness(sdk.RequestEkycLiveness{
+    Image:          `base64 image`, // an image that contains a face
+    MykadRequestID: `123456789`, // request ID from MyKad Recognition
+})
 ```
