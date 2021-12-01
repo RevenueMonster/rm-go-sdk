@@ -314,3 +314,17 @@ sdk.NewClient(sdk.Client{
     MykadRequestID: `123456789`, // request ID from MyKad Recognition
 })
 ```
+
+* Ekyc - Get eKYC Result
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey:  []byte(`---private key---`),
+    AccessToken: `access token`,
+}).EkycLiveness(sdk.RequestGetEkycResult{
+    ID:          `123456789`, // the ekycId obtained after liveness verification
+    Includes: ["mykadImage", "selfieImage"], // optional parameter to obtain request images
+})
+```
