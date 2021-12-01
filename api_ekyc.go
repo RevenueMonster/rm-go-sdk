@@ -19,6 +19,11 @@ type RequestEkycLiveness struct {
 	MykadRequestID string `json:"mykad_request_id"`
 }
 
+type RequestGetEkycResult struct {
+	ID       string   `json:"id"`
+	Includes []string `json:"includes"`
+}
+
 type ResponseEkycMykad struct {
 	Code string `json:"code"`
 	Item struct {
@@ -50,6 +55,13 @@ type ResponseEkycLiveness struct {
 	Err  *Error            `json:"error"`
 }
 
+type ResponseGetEkycResult struct {
+	Code string        `json:"code"`
+	Item GetEkycResult `json:"item"`
+	Err  *Error        `json:"error"`
+}
+
+// EkycMyKad :
 func (c Client) EkycMyKad(request RequestEkycMykad) (*ResponseEkycMykad, error) {
 	if c.err != nil {
 		return nil, c.err
@@ -73,6 +85,7 @@ func (c Client) EkycMyKad(request RequestEkycMykad) (*ResponseEkycMykad, error) 
 	return response, nil
 }
 
+// EkycFaceCompare :
 func (c Client) EkycFaceCompare(request RequestEkycFaceCompare) (*ResponseEkycFaceCompare, error) {
 	if c.err != nil {
 		return nil, c.err
@@ -95,6 +108,7 @@ func (c Client) EkycFaceCompare(request RequestEkycFaceCompare) (*ResponseEkycFa
 	return response, nil
 }
 
+// EkycLiveness :
 func (c Client) EkycLiveness(request RequestEkycLiveness) (*ResponseEkycLiveness, error) {
 	if c.err != nil {
 		return nil, c.err
@@ -106,6 +120,29 @@ func (c Client) EkycLiveness(request RequestEkycLiveness) (*ResponseEkycLiveness
 		Service:  "ekyc",
 		Version:  "v1",
 		Function: "face-compare-with-mykad",
+		Request:  request,
+	}, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+	return response, nil
+}
+
+// GetEkycResult :
+func (c Client) GetEkycResult(request RequestGetEkycResult) (*ResponseGetEkycResult, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	response := new(ResponseGetEkycResult)
+	requestURL := c.prepareAPIURL(pathAPIService)
+	if err := c.httpAPI(methodPOST, fmt.Sprintf("%s", requestURL), RequestService{
+		Service:  "ekyc",
+		Version:  "v1",
+		Function: "get-ekyc-result",
 		Request:  request,
 	}, response); err != nil {
 		return nil, err

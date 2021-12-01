@@ -121,3 +121,41 @@ type FaceCompareResult struct {
 	Status       string `json:"status"`
 	UpdatedAt    string `json:"updatedAt"`
 }
+
+// EkycResult :
+type EkycResult struct {
+	Scores MykadScore      `bson:"scores" json:"scores"`
+	Faces  []FaceDetResult `bson:"faces" json:"faces"`
+	Data   struct {
+		IC       string       `bson:"ic" json:"ic"`
+		Name     string       `bson:"name" json:"name"`
+		Gender   string       `bson:"gender" json:"gender"`
+		IsMuslim bool         `bson:"isMuslim" json:"isMuslim"`
+		Address  MykadAddress `bson:"address" json:"address"`
+	} `bson:"data" json:"data"`
+	Object struct {
+		Prediction string  `bson:"prediction" json:"prediction"`
+		Confidence float64 `bson:"confidence" json:"confidence"`
+	} `bson:"object" json:"object"`
+	Duration float64 `bson:"duration" json:"duration"`
+}
+
+// GetEkycResult :
+type GetEkycResult struct {
+	ID                   string `json:"_id"`
+	FaceAction           string `json:"faceAction"`
+	FaceCompareRequestId string `json:"faceCompareRequestId"`
+	MykadAction          string `json:"mykadAction"`
+	MykadRequestId       string `json:"mykadRequestId"`
+	MykadImage           string `json:"mykadImage,omitempty"`
+	SelfieImage          string `json:"selfieImage,omitempty"`
+	FaceResult           struct {
+		Similarity   uint8 `json:"similarity"`
+		IsSamePerson bool  `json:"isSamePerson"`
+	} `json:"faceResult"`
+	Reasons   []string     `json:"reasons"`
+	Results   []EkycResult `json:"results"`
+	Status    string       `json:"status"`
+	Verdict   string       `json:"verdict"`
+	UpdatedAt string       `json:"updatedAt,omitempty"`
+}
