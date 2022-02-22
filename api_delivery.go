@@ -76,13 +76,14 @@ type DeliveryPointContact struct {
 
 // RequestCreateDelivery :
 type RequestCreateDelivery struct {
-	DeliveryVendor     DeliveryVendor  `json:"deliveryVendor"`
-	VehicleType        VehicleType     `json:"vehicleType"`
-	Type               DeliveryType    `json:"type"`
-	Points             []DeliveryPoint `json:"points"`
-	PreviousDeliveryID string          `json:"previousDeliveryID"`
-	TransactionID      string          `json:"transactionID"`
-	StoreID            string          `json:"storeID"`
+	DeliveryVendor      DeliveryVendor  `json:"deliveryVendor"`
+	VehicleType         VehicleType     `json:"vehicleType"`
+	Type                DeliveryType    `json:"type"`
+	Points              []DeliveryPoint `json:"points"`
+	PreviousDeliveryID  string          `json:"previousDeliveryID"`
+	TransactionID       string          `json:"transactionID"`
+	StoreID             string          `json:"storeID"`
+	StoreFoodConformity string          `json:"storeFoodConformity"`
 }
 
 // ResponseCreateDelivery :
@@ -134,11 +135,12 @@ func (c Client) GetDeliveryByID(id string) (*ResponseGetDeliveryByID, error) {
 
 // RequestCalculateDeliveryFee :
 type RequestCalculateDeliveryFee struct {
-	DeliveryVendor DeliveryVendor  `json:"deliveryVendor"`
-	VehicleType    VehicleType     `json:"vehicleType"`
-	Type           DeliveryType    `json:"type"`
-	Points         []DeliveryPoint `json:"points"`
-	StoreID        string          `json:"storeID"`
+	DeliveryVendor      DeliveryVendor  `json:"deliveryVendor"`
+	VehicleType         VehicleType     `json:"vehicleType"`
+	Type                DeliveryType    `json:"type"`
+	Points              []DeliveryPoint `json:"points"`
+	StoreID             string          `json:"storeID"`
+	StoreFoodConformity string          `json:"storeFoodConformity"`
 }
 
 // ResponseCalculateDeliveryFee :
