@@ -284,6 +284,7 @@ sdk.NewClient(sdk.Client{
     AccessToken: `access token`,
 }).EkycMyKad(sdk.RequestEkycMykad{
     Image: `base64 image`, // an image that contains MyKad
+    NotifyUrl: `https://your-backend-notify-path` // a POST request handler to receive ekyc result
 })
 ```
 
@@ -315,6 +316,19 @@ sdk.NewClient(sdk.Client{
 })
 ```
 
+* Ekyc - Get Mykad Result
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey:  []byte(`---private key---`),
+    AccessToken: `access token`,
+}).GetMykadResult(sdk.RequestGetMykadResult{
+    ID:          `123456789`, // the mykad request id
+})
+```
+
 * Ekyc - Get eKYC Result
 ```go
 sdk.NewClient(sdk.Client{
@@ -323,7 +337,7 @@ sdk.NewClient(sdk.Client{
     IsSandbox:  true,
     PrivateKey:  []byte(`---private key---`),
     AccessToken: `access token`,
-}).EkycLiveness(sdk.RequestGetEkycResult{
+}).GetEkycResult(sdk.RequestGetEkycResult{
     ID:          `123456789`, // the ekycId obtained after liveness verification
     Includes: ["mykadImage", "selfieImage"], // optional parameter to obtain request images
 })
