@@ -142,7 +142,7 @@ type EkycResult struct {
 
 // GetEkycResult :
 type GetEkycResult struct {
-	ID                   string `json:"_id"`
+	ID                   string `json:"id"`
 	FaceAction           string `json:"faceAction"`
 	FaceCompareRequestId string `json:"faceCompareRequestId"`
 	MykadAction          string `json:"mykadAction"`
