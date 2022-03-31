@@ -56,6 +56,7 @@ type ResponseEkycMykad struct {
 	Code string `json:"code"`
 	Item struct {
 		RequestID string `json:"requestID"`
+		Status    string `json:"status"`
 	} `json:"item"`
 	Err *Error `json:"error"`
 }
