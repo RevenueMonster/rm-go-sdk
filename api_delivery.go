@@ -84,6 +84,7 @@ type RequestCreateDelivery struct {
 	TransactionID       string          `json:"transactionID"`
 	StoreID             string          `json:"storeID"`
 	StoreFoodConformity string          `json:"storeFoodConformity"`
+	OrderPlatform       string          `json:"orderPlatform"`
 }
 
 // ResponseCreateDelivery :
