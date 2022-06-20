@@ -62,8 +62,9 @@ type RequestCreatePaymentCheckout struct {
 	Voucher  struct {
 		Code string `json:"code"`
 	} `json:"voucher"`
-	Source       string                `json:"source"`
-	InHousePromo []RequestInHousePromo `json:"inHousePromo"`
+	Source           string                `json:"source"`
+	InHousePromo     []RequestInHousePromo `json:"inHousePromo"`
+	ExpiresInSeconds int64                 `json:"expiresInSeconds"`
 }
 
 // ResponseCreatePaymentCheckout :
