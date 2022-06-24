@@ -1,6 +1,9 @@
 package sdk
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // Delivery :
 type Delivery struct {
@@ -142,6 +145,8 @@ type RequestCalculateDeliveryFee struct {
 	Points              []DeliveryPoint `json:"points"`
 	StoreID             string          `json:"storeID"`
 	StoreFoodConformity string          `json:"storeFoodConformity"`
+	OrderAmount         uint64          `json:"orderAmount"`
+	DeliveryTime        time.Time       `json:"deliveryTime"`
 }
 
 // ResponseCalculateDeliveryFee :
