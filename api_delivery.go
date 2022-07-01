@@ -88,6 +88,8 @@ type RequestCreateDelivery struct {
 	StoreID             string          `json:"storeID"`
 	StoreFoodConformity string          `json:"storeFoodConformity"`
 	OrderPlatform       string          `json:"orderPlatform"`
+	OrderAmount         uint64          `json:"orderAmount"`
+	DeliveryTime        time.Time       `json:"deliveryTime"`
 }
 
 // ResponseCreateDelivery :
