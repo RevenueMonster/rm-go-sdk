@@ -214,6 +214,7 @@ type RequestCancelDelivery struct {
 	CheckoutID      string `json:"checkoutId"`
 	RefundAmount    uint64 `json:"refundAmount"`
 	IsRefundAllowed string `json:"isRefundAllowed"`
+	IsChangeRider   bool   `json:"isChangeRider"`
 }
 
 // ResponseCancelDelivery :
