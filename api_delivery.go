@@ -23,13 +23,15 @@ type ExtraInfo struct {
 
 // Courier :
 type Courier struct {
-	ID        string  `json:"id"`
-	Surname   string  `json:"surname"`
-	Name      string  `json:"name"`
-	Phone     string  `json:"phone"`
-	PhotoURL  string  `json:"photoUrl"`
-	Latitude  float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
+	ID          string  `json:"id"`
+	Surname     string  `json:"surname"`
+	Name        string  `json:"name"`
+	Phone       string  `json:"phone"`
+	PhotoURL    string  `json:"photoUrl"`
+	Latitude    float64 `json:"latitude"`
+	Longitude   float64 `json:"longitude"`
+	TrackingNo  string  `json:"trackingNo"`
+	TrackingURL string  `json:"trackingURL"`
 }
 
 // DeliveryType :
