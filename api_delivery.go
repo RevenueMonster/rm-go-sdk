@@ -88,6 +88,7 @@ type RequestCreateDelivery struct {
 	StoreID             string          `json:"storeID"`
 	StoreFoodConformity string          `json:"storeFoodConformity"`
 	OrderPlatform       string          `json:"orderPlatform"`
+	OrderHashID         string          `json:"orderHashID"`
 	OrderAmount         uint64          `json:"orderAmount"`
 	DeliveryTime        time.Time       `json:"deliveryTime"`
 }
@@ -147,6 +148,7 @@ type RequestCalculateDeliveryFee struct {
 	Points              []DeliveryPoint `json:"points"`
 	StoreID             string          `json:"storeID"`
 	StoreFoodConformity string          `json:"storeFoodConformity"`
+	OrderHashID         string          `json:"orderHashID"`
 	OrderAmount         uint64          `json:"orderAmount"`
 	DeliveryTime        time.Time       `json:"deliveryTime"`
 }
