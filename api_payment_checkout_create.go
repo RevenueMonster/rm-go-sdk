@@ -83,6 +83,9 @@ func (c Client) CreatePaymentCheckout(request RequestCreatePaymentCheckout) (*Re
 		return nil, c.err
 	}
 
+	if request.ExpiresInSeconds <= 0 {
+		request.ExpiresInSeconds = 600
+	}
 	method := pathAPICreatePaymentCheckoutURL.method
 	requestURL := c.prepareAPIURL(pathAPICreatePaymentCheckoutURL)
 
