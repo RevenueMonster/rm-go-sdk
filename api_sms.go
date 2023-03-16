@@ -14,6 +14,7 @@ type RequestSendSms struct {
 	PhoneNumber string  `json:"phoneNumber"`
 	Message     string  `json:"message"`
 	Type        SmsType `json:"type"`
+	Gateway     string  `json:"gateway"`
 }
 
 // ResponseSendSms :
