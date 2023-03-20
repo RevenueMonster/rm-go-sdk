@@ -24,6 +24,7 @@ const (
 const (
 	methodPOST   = "POST"
 	methodGET    = "GET"
+	methodPUT    = "PUT"
 	methodDELETE = "DELETE"
 )
 
@@ -58,6 +59,8 @@ var pathAPICreatePaymentCheckoutURL = newPath(methodPOST, "/payment/online")
 var pathAPIGetQRCodeByCheckoutIDURL = newPath(methodGET, "/payment/online/qrcode")
 var pathAPICreatePaymentCheckoutByMethodURL = newPath(methodPOST, "/payment/online/checkout")
 var pathAPIGetOnlineTransactionByCheckoutIDURL = newPath(methodGET, "/payment/online")
+var pathAPIGetPaymentCheckoutCustomerToken = newPath(methodGET, "/payment/tokens/{customer_id}")
+var pathAPIDeletePaymentCheckoutCustomerToken = newPath(methodDELETE, "/payment/tokens/{customer_id}")
 
 // Payment Transaction Endpoint
 var pathAPIGetPaymentTransactionByIDURL = newPath(methodGET, "/payment/transaction")
@@ -116,3 +119,9 @@ var pathAPIGetVoucherBatchByKeyURL = newPath(methodGET, "/voucher-batch")
 // Service
 var pathAPIService = newPath(methodPOST, "/service")
 var pathAPIServiceWebhookURL = newPath(methodPOST, "/service/webhook")
+
+// Tokenized Customer
+var pathAPICreateTokenizedPaymentCustomer = newPath(methodPOST, "/tokenized-payment")
+var pathAPIGetTokenizedPaymentCustomerByID = newPath(methodGET, "/customer/{customer_id}")
+var pathAPIToggleTokenizedPaymentCustomerStatus = newPath(methodPUT, "/customer/{customer_id}/status")
+var pathAPICreateOrderWithTokenizedCustomer = newPath(methodPOST, "/customer/{customer_id}/order")

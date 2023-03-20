@@ -8,9 +8,21 @@ import (
 
 // RequestCreatePaymentCheckoutByMethod :
 type RequestCreatePaymentCheckoutByMethod struct {
-	Method     string `json:"method"`
-	CheckoutID string `json:"checkoutId"`
-	Type       string `json:"type"`
+	Method     string                            `json:"method"`
+	CheckoutID string                            `json:"checkoutId"`
+	Type       string                            `json:"type"`
+	Card       *RequestCreatePaymentCheckoutCard `json:"card"`
+}
+
+type RequestCreatePaymentCheckoutCard struct {
+	IsToken     bool
+	IsSave      bool
+	No          string
+	CVC         string
+	Name        string
+	Month       uint32
+	Year        uint32
+	CountryCode string
 }
 
 // ResponseCreatePaymentCheckoutByMethod :
