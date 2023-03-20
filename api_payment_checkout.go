@@ -8,21 +8,26 @@ import (
 
 // RequestCreatePaymentCheckoutByMethod :
 type RequestCreatePaymentCheckoutByMethod struct {
-	Method     string                            `json:"method"`
-	CheckoutID string                            `json:"checkoutId"`
-	Type       string                            `json:"type"`
-	Card       *RequestCreatePaymentCheckoutCard `json:"card"`
+	Method     string                             `json:"method"`
+	CheckoutID string                             `json:"checkoutId"`
+	Type       string                             `json:"type"`
+	Gobiz      *RequestCreatePaymentCheckoutGobiz `json:"gobiz"`
+	Card       *RequestCreatePaymentCheckoutCard  `json:"card"`
+}
+
+type RequestCreatePaymentCheckoutGobiz struct {
+	Type string `json:"type"`
 }
 
 type RequestCreatePaymentCheckoutCard struct {
-	IsToken     bool
-	IsSave      bool
-	No          string
-	CVC         string
-	Name        string
-	Month       uint32
-	Year        uint32
-	CountryCode string
+	IsToken     bool   `json:"isToken"`
+	IsSave      bool   `json:"isSave"`
+	No          string `json:"no"`
+	CVC         string `json:"cvc"`
+	Name        string `json:"name"`
+	Month       uint32 `json:"month"`
+	Year        uint32 `json:"year"`
+	CountryCode string `json:"countryCode"`
 }
 
 // ResponseCreatePaymentCheckoutByMethod :
