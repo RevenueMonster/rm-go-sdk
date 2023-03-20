@@ -39,7 +39,8 @@ type ResponseCreatePaymentCheckoutByMethod struct {
 			Data        string `json:"data"`
 			Base64Image string `json:"base64Image"`
 		} `json:"qrcode"`
-		Type string `json:"type"`
+		Type        string              `json:"type"`
+		Transaction *PaymentTransaction `json:"transaction"`
 	} `json:"item"`
 	Code string `json:"code"`
 	Err  *Error `json:"error"`
