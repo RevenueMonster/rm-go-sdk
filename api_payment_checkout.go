@@ -11,8 +11,13 @@ type RequestCreatePaymentCheckoutByMethod struct {
 	Method     string                             `json:"method"`
 	CheckoutID string                             `json:"checkoutId"`
 	Type       string                             `json:"type"`
+	Fpx        *RequestCreatePaymentCheckoutFpx   `json:"fpx"`
 	Gobiz      *RequestCreatePaymentCheckoutGobiz `json:"gobiz"`
 	Card       *RequestCreatePaymentCheckoutCard  `json:"card"`
+}
+
+type RequestCreatePaymentCheckoutFpx struct {
+	BankCode string `json:"bankCode"`
 }
 
 type RequestCreatePaymentCheckoutGobiz struct {
