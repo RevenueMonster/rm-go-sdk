@@ -125,3 +125,6 @@ var pathAPICreateTokenizedPaymentCustomer = newPath(methodPOST, "/tokenized-paym
 var pathAPIGetTokenizedPaymentCustomerByID = newPath(methodGET, "/customer/{customer_id}")
 var pathAPIToggleTokenizedPaymentCustomerStatus = newPath(methodPUT, "/customer/{customer_id}/status")
 var pathAPICreateOrderWithTokenizedCustomer = newPath(methodPOST, "/customer/{customer_id}/order")
+
+// FPX
+var pathAPIGetFpxBankList = newPath(methodGET, "/payment/fpx-bank")
