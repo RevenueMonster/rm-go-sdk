@@ -38,9 +38,9 @@ type RequestGetPaymentCheckoutCustomerToken struct {
 }
 
 type ResponseGetPaymentCheckoutCustomerToken struct {
-	Items []CustomerToken `json:"items"`
-	Code  string          `json:"code"`
-	Err   *Error          `json:"error"`
+	Item []CustomerToken `json:"item"`
+	Code string          `json:"code"`
+	Err  *Error          `json:"error"`
 }
 
 // GetPaymentCheckoutCustomerToken :
