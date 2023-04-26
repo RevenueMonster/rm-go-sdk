@@ -28,6 +28,11 @@ type RequestGetMykadResult struct {
 	ID string `json:"id"`
 }
 
+type RequestGetLandmarkInfo struct {
+	ID        string   `json:"id"`
+	Landmarks []string `json:"landmarks"`
+}
+
 type RequestGetEkycResult struct {
 	ID       string   `json:"id"`
 	Includes []string `json:"includes"`
@@ -90,6 +95,12 @@ type ResponseGetMykadResult struct {
 		UpdatedAt    string        `json:"updatedAt,omitempty"`
 	} `json:"item"`
 	Err *Error `json:"error"`
+}
+
+type ResponseGetLandmarkInfo struct {
+	Code string          `json:"code"`
+	Item GetLandmarkInfo `json:"item"`
+	Err  *Error          `json:"error"`
 }
 
 type ResponseGetEkycResult struct {
@@ -204,6 +215,29 @@ func (c Client) GetMykadResult(request RequestGetMykadResult) (*ResponseGetMykad
 		Service:  "ekyc",
 		Version:  "v1",
 		Function: "get-mykad-result",
+		Request:  request,
+	}, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+	return response, nil
+}
+
+// GetLandmarkInfo :
+func (c Client) GetLandmarkInfo(request RequestGetLandmarkInfo) (*ResponseGetLandmarkInfo, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	response := new(ResponseGetLandmarkInfo)
+	requestURL := c.prepareAPIURL(pathAPIService)
+	if err := c.httpAPI(methodPOST, requestURL, RequestService{
+		Service:  "ekyc",
+		Version:  "v1",
+		Function: "get-landmark-info",
 		Request:  request,
 	}, response); err != nil {
 		return nil, err
