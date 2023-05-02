@@ -13,6 +13,14 @@ type BoundingBoxResult struct {
 	Boxes      []BoundingBox `bson:"boxes" json:"boxes"`
 }
 
+// LandmarksInfowithImage :
+type LandmarksWithImageResult struct {
+	Prediction string        `bson:"prediction" json:"prediction"`
+	Confidence float64       `bson:"confidence" json:"confidence"`
+	Boxes      []BoundingBox `bson:"boxes" json:"boxes"`
+	Image      string        `bson:"image" json:"image"`
+}
+
 // FaceDetResult :
 type FaceDetResult struct {
 	Confidence float64       `bson:"confidence" json:"confidence"`
@@ -158,4 +166,10 @@ type GetEkycResult struct {
 	Status    string       `json:"status"`
 	Verdict   string       `json:"verdict"`
 	UpdatedAt string       `json:"updatedAt,omitempty"`
+}
+
+// GetLandmarkInfo :
+type GetLandmarkInfo struct {
+	Results  []LandmarksWithImageResult `json:"results,omitempty"`
+	Messages []string                   `json:"messages,omitempty"`
 }

@@ -329,6 +329,20 @@ sdk.NewClient(sdk.Client{
 })
 ```
 
+* Ekyc - Get Landmarks Info
+```go
+sdk.NewClient(sdk.Client{
+    ID:         "123456789",
+    Secret:     "123456789",
+    IsSandbox:  true,
+    PrivateKey:  []byte(`---private key---`),
+    AccessToken: `access token`,
+}).GetLandmarkInfo(sdk.RequestGetLandmarkInfo{
+    ID:          `123456789`, // the mykad request id
+    Includes: ["msc_logo", "malaysia_flag"], // optional parameter to specify landmark types to be acquired
+})
+```
+
 * Ekyc - Get eKYC Result
 ```go
 sdk.NewClient(sdk.Client{
