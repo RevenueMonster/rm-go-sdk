@@ -180,28 +180,13 @@ The golang version 1.11 and above
 * Payment (Quick Pay) - Refund
     * To refund the successful transactions
 ```go
-   sdk.NewClient(sdk.Client{
-    	ID:         "123456789",
-    	Secret:     "123456789",
-    	IsSandbox:  true,
-   	PrivateKey: []byte(`---private key---`),
-    	PublicKey:  []byte(`---public key---`),
-    }).RefundPaymentTransaction(sdk.RequestRefundPaymentTransaction{
-	TransactionID: "transaction-id",
-	Reason:        "payment transaction",
-    })
+ 
 ```
 
 * Payment (Quick Pay) - Reverse
     * To reverse time-out or problematic transaction
 ```go
-   sdk.NewClient(sdk.Client{
-    	ID:         "123456789",
-    	Secret:     "123456789",
-    	IsSandbox:  true,
-   	PrivateKey: []byte(`---private key---`),
-    	PublicKey:  []byte(`---public key---`),
-    }).ReversedTransaction("order-id")
+   
 ```
 
 * Payment (Quick Pay) - Get Payment Transaction By ID
