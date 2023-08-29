@@ -62,6 +62,10 @@ var pathAPIGetOnlineTransactionByCheckoutIDURL = newPath(methodGET, "/payment/on
 var pathAPIGetPaymentCheckoutCustomerToken = newPath(methodGET, "/payment/tokens/{customer_id}")
 var pathAPIDeletePaymentCheckoutCustomerToken = newPath(methodDELETE, "/payment/tokens/{customer_id}")
 
+// Payment QuickPay Endpoint
+var pathAPICreatePaymentQuickPay = newPath(methodGET, "/payment/quickpay")
+var pathAPICreateTerminalPayment = newPath(methodGET, "/payment/terminal/quickpay")
+
 // Payment Transaction Endpoint
 var pathAPIGetPaymentTransactionByIDURL = newPath(methodGET, "/payment/transaction")
 var pathAPIGetPaymentTransactionByOrderIDURL = newPath(methodGET, "/payment/transaction/order")
