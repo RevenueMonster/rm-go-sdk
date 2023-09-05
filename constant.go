@@ -124,6 +124,7 @@ var pathAPIGetVoucherBatchByKeyURL = newPath(methodGET, "/voucher-batch")
 var pathAPIService = newPath(methodPOST, "/service")
 var pathAPIServiceWebhookURL = newPath(methodPOST, "/service/webhook")
 
+<<<<<<< Updated upstream
 // Tokenized Customer
 var pathAPICreateTokenizedPaymentCustomer = newPath(methodPOST, "/tokenized-payment")
 var pathAPIGetTokenizedPaymentCustomerByID = newPath(methodGET, "/customer/{customer_id}")
@@ -132,3 +133,7 @@ var pathAPICreateOrderWithTokenizedCustomer = newPath(methodPOST, "/customer/{cu
 
 // FPX
 var pathAPIGetFpxBankList = newPath(methodGET, "/payment/fpx-bank")
+=======
+// Pos Terminal
+var pathAPIQuickPay = newPath(methodPOST, "/payment/terminal/quickpay")
+>>>>>>> Stashed changes
