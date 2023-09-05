@@ -64,7 +64,7 @@ var pathAPIDeletePaymentCheckoutCustomerToken = newPath(methodDELETE, "/payment/
 
 // Payment QuickPay Endpoint
 var pathAPICreatePaymentQuickPay = newPath(methodGET, "/payment/quickpay")
-var pathAPICreateTerminalPayment = newPath(methodGET, "/payment/terminal/quickpay")
+var pathAPICreateTerminalPayment = newPath(methodPOST, "/payment/terminal/quickpay")
 
 // Payment Transaction Endpoint
 var pathAPIGetPaymentTransactionByIDURL = newPath(methodGET, "/payment/transaction")

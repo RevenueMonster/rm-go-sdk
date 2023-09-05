@@ -58,6 +58,14 @@ const (
 	RequestCreateTerminalPaymentTypeCard   = "CARD"
 )
 
+type RequestCreateTerminalPaymentReceiptType uint
+
+const (
+	RequestCreateTerminalPaymentReceiptTypeMerchantAndCustomer RequestCreateTerminalPaymentReceiptType = 1
+	RequestCreateTerminalPaymentReceiptTypeCustomer            RequestCreateTerminalPaymentReceiptType = 2
+	RequestCreateTerminalPaymentReceiptTypeNone                RequestCreateTerminalPaymentReceiptType = 3
+)
+
 type RequestCreateTerminalPaymentCameraType string
 
 const (
@@ -65,20 +73,23 @@ const (
 	RequestCreateTerminalPaymentCameraTypeBack  = "BACK"
 )
 
+// RequestCreateTerminalPaymentOrder :
+type RequestCreateTerminalPaymentOrder struct {
+	ID             string `json:"id"`
+	Title          string `json:"title"`
+	CurrencyType   string `json:"currencyType"`
+	Amount         uint   `json:"amount"`
+	Detail         string `json:"detail"`
+	AdditionalData string `json:"additionalData"`
+}
+
 // RequestCreateTerminalPayment :
 type RequestCreateTerminalPayment struct {
 	TerminalID  string                                 `json:"terminalId"`
 	Type        RequestCreateTerminalPaymentType       `json:"type"`
 	CameraType  RequestCreateTerminalPaymentCameraType `json:"cameraType"`
-	ReceiptType int                                    `json:"receiptType"`
-	Order       struct {
-		ID             string `json:"id"`
-		Title          string `json:"title"`
-		CurrencyType   string `json:"currencyType"`
-		Amount         int64  `json:"amount"`
-		Detail         string `json:"detail"`
-		AdditionalData string `json:"additionalData"`
-	} `json:"order"`
+	ReceiptType uint                                   `json:"receiptType"`
+	Order       RequestCreateTerminalPaymentOrder      `json:"order"`
 }
 
 // ResponseCreatePaymentQuickPay :
