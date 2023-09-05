@@ -94,9 +94,8 @@ type RequestCreateTerminalPayment struct {
 
 // ResponseCreatePaymentQuickPay :
 type ResponseCreateTerminalPayment struct {
-	Item PaymentTransaction `json:"item"`
-	Code string             `json:"code"`
-	Err  *Error             `json:"error"`
+	PaymentTransaction
+	Err *Error `json:"error"`
 }
 
 // CreateTerminalPayment :
