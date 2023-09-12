@@ -132,3 +132,8 @@ var pathAPICreateOrderWithTokenizedCustomer = newPath(methodPOST, "/customer/{cu
 
 // FPX
 var pathAPIGetFpxBankList = newPath(methodGET, "/payment/fpx-bank")
+
+// Visa Offers Platform
+var pathAPIVOPEnrollUserURL = newPath(methodPOST, "/vop/enroll-user")
+var pathAPIVOPUnenrollUserURL = newPath(methodDELETE, "/vop/unenroll-user")
+var pathAPIVOPWebhookURL = newPath(methodPOST, "/vop/webhook")
