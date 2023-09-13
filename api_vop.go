@@ -5,10 +5,11 @@ import (
 )
 
 type RequestVOPEnrollUser struct {
-	Identifier string `json:"identifier"`
-	UserID     string `json:"userId"`
-	CardPan    string `json:"cardPan"`
-	Name       string `json:"name"`
+	Identifier  string `json:"identifier"`
+	UserID      string `json:"userId"`
+	CardPan     string `json:"cardPan"`
+	Name        string `json:"name"`
+	RedirectURL string `json:"redirectUrl"`
 }
 
 type RequestVOPUnenrollUser struct {
