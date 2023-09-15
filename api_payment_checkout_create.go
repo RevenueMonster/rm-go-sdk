@@ -65,6 +65,7 @@ type RequestCreatePaymentCheckout struct {
 	Source           string                `json:"source"`
 	InHousePromo     []RequestInHousePromo `json:"inHousePromo"`
 	ExpiresInSeconds int64                 `json:"expiresInSeconds"`
+	PaymentOrders    []string              `json:"paymentOrders"`
 }
 
 // ResponseCreatePaymentCheckout :
