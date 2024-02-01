@@ -135,6 +135,8 @@ type RequestCreateOrderWithTokenizedCustomer struct {
 	TokenizedCustomerID string `json:"-"`
 	Currency            string `json:"currency"`
 	Amount              int64  `json:"amount"`
+	Title               string `json:"title"` 
+	Description         string `json:"description"`
 }
 
 type ResponseCreateOrderWithTokenizedCustomer struct {
@@ -154,7 +156,7 @@ func (c Client) CreateOrderWithTokenizedCustomer(request RequestCreateOrderWithT
 	requestURL = strings.ReplaceAll(requestURL, "{customer_id}", request.TokenizedCustomerID)
 
 	response := new(ResponseCreateOrderWithTokenizedCustomer)
-	if err := c.httpAPI(method, requestURL, nil, response); err != nil {
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
 	}
 
