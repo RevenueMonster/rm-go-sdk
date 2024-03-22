@@ -1,6 +1,9 @@
 package sdk
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type VOPEnrollUser struct {
 	ID              string `json:"id"`
@@ -31,21 +34,8 @@ type RequestVOPEnrollCard struct {
 	Name    string `json:"name"`
 }
 
-type ResponseVOPUserItem struct {
-	Item struct {
-		VOPEnrollCard VOPEnrollCard `json:"card"`
-		VOPEnrollUser VOPEnrollUser `json:"user"`
-	} `json:"item"`
-	Code string `json:"code"`
-}
-
 type RequestVOPUnenrollUser struct {
 	UserID string `json:"userId"`
-}
-
-type ResponseVOPCardItem struct {
-	Item VOPEnrollCard `json:"item"`
-	Code string        `json:"code"`
 }
 
 type RequestVOPUnenrollCard struct {
@@ -63,8 +53,24 @@ type RequestVOPWebhook struct {
 	MerchantCategoryCode string `json:"merchantCategoryCode"`
 }
 
+type ResponseVOPUserItem struct {
+	Item struct {
+		VOPEnrollCard VOPEnrollCard `json:"card"`
+		VOPEnrollUser VOPEnrollUser `json:"user"`
+	} `json:"item"`
+	Code string `json:"code"`
+	Err  *Error `json:"error"`
+}
+
+type ResponseVOPCardItem struct {
+	Item VOPEnrollCard `json:"item"`
+	Code string        `json:"code"`
+	Err  *Error        `json:"error"`
+}
+
 type ResponseVOPItem struct {
 	Code string `json:"code"`
+	Err  *Error `json:"error"`
 }
 
 // VOPEnrollUser :
@@ -77,11 +83,13 @@ func (c Client) VOPEnrollUser(request RequestVOPEnrollUser) (*ResponseVOPUserIte
 	method := pathAPIVOPEnrollUserURL.method
 	requestURL := c.prepareAPIURL(pathAPIVOPEnrollUserURL)
 
-	fmt.Println(requestURL)
-
 	response := new(ResponseVOPUserItem)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
 	}
 
 	return response, nil
@@ -102,6 +110,10 @@ func (c Client) VOPUnenrollUser(request RequestVOPUnenrollUser) (*ResponseVOPIte
 		return nil, err
 	}
 
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+
 	return response, nil
 }
 
@@ -118,6 +130,10 @@ func (c Client) VOPEnrollCard(request RequestVOPEnrollCard) (*ResponseVOPCardIte
 	response := new(ResponseVOPCardItem)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
 	}
 
 	return response, nil
@@ -138,6 +154,10 @@ func (c Client) VOPUnenrollCard(request RequestVOPUnenrollCard) (*ResponseVOPIte
 		return nil, err
 	}
 
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+
 	return response, nil
 }
 
@@ -154,6 +174,10 @@ func (c Client) VOPWebhook(request RequestVOPWebhook) (*ResponseVOPItem, error) 
 	response := new(ResponseVOPItem)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
 	}
 
 	return response, nil
