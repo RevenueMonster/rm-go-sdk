@@ -2,88 +2,44 @@ package sdk
 
 import (
 	"errors"
-	"fmt"
+	"strings"
 )
 
-type VOPEnrollUser struct {
-	ID              string `json:"id"`
-	CreatedDateTime string `json:"createdAt"`
-	UpdatedDateTime string `json:"updatedAt"`
+// RequestCreateVOPSubscription :
+type RequestCreateVOPSubscription struct {
+	TokenizedCustomerID string `json:"-"`
+	NotifyURL           string `json:"notifyUrl"`
 }
 
-type VOPEnrollCard struct {
-	ID              string `json:"id"`
-	UserID          string `json:"userId"`
-	Name            string `json:"name"`
-	PanLastFour     string `json:"panLastFour"`
-	Type            string `json:"type"`
-	CreatedDateTime string `json:"createdAt"`
-	UpdatedDateTime string `json:"updatedAt"`
+// RequestDeleteVOPSubscription :
+type RequestDeleteVOPSubscription struct {
+	TokenizedCustomerID string `json:"-"`
 }
 
-type RequestVOPEnrollUser struct {
-	UserID    string `json:"userId"`
-	CardPan   string `json:"cardPan"`
-	Name      string `json:"name"`
-	NotifyURL string `json:"notifyUrl"`
-}
-
-type RequestVOPEnrollCard struct {
-	UserID  string `json:"userId"`
-	CardPan string `json:"cardPan"`
-	Name    string `json:"name"`
-}
-
-type RequestVOPUnenrollUser struct {
-	UserID string `json:"userId"`
-}
-
-type RequestVOPUnenrollCard struct {
-	UserID string `json:"userId"`
-	CardID string `json:"cardId"`
-}
-
-type RequestVOPWebhook struct {
-	UserID               string `json:"userId"`
-	CardID               string `json:"cardId"`
-	TransactionID        string `json:"transactionId"`
-	TransactionDateTime  string `json:"transactionAt"`
-	Amount               uint64 `json:"amount"`
-	Currency             string `json:"currency"`
-	MerchantCategoryCode string `json:"merchantCategoryCode"`
-}
-
-type ResponseVOPUserItem struct {
+// ResponseCreateVOPSubscription :
+type ResponseVOPSubscription struct {
 	Item struct {
-		VOPEnrollCard VOPEnrollCard `json:"card"`
-		VOPEnrollUser VOPEnrollUser `json:"user"`
+		ID              string `json:"id"`
+		NotifyURL       string `json:"notifyUrl"`
+		CreatedDateTime string `json:"createdAt"`
+		UpdatedDateTime string `json:"updatedAt"`
 	} `json:"item"`
 	Code string `json:"code"`
 	Err  *Error `json:"error"`
 }
 
-type ResponseVOPCardItem struct {
-	Item VOPEnrollCard `json:"item"`
-	Code string        `json:"code"`
-	Err  *Error        `json:"error"`
-}
-
-type ResponseVOPItem struct {
-	Code string `json:"code"`
-	Err  *Error `json:"error"`
-}
-
-// VOPEnrollUser :
-func (c Client) VOPEnrollUser(request RequestVOPEnrollUser) (*ResponseVOPUserItem, error) {
+// CreateVOPSubscription :
+func (c Client) CreateVOPSubscription(request RequestCreateVOPSubscription) (*ResponseVOPSubscription, error) {
 
 	if c.err != nil {
 		return nil, c.err
 	}
 
-	method := pathAPIVOPEnrollUserURL.method
-	requestURL := c.prepareAPIURL(pathAPIVOPEnrollUserURL)
+	method := pathCreateVOPSubscription.method
+	requestURL := c.prepareAPIURL(pathCreateVOPSubscription)
+	requestURL = strings.ReplaceAll(requestURL, "{customer_id}", request.TokenizedCustomerID)
 
-	response := new(ResponseVOPUserItem)
+	response := new(ResponseVOPSubscription)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
 	}
@@ -95,84 +51,19 @@ func (c Client) VOPEnrollUser(request RequestVOPEnrollUser) (*ResponseVOPUserIte
 	return response, nil
 }
 
-// VOPUnenrollUser :
-func (c Client) VOPUnenrollUser(request RequestVOPUnenrollUser) (*ResponseVOPItem, error) {
+// DeleteVOPSubscription :
+func (c Client) DeleteVOPSubscription(request RequestDeleteVOPSubscription) (*ResponseVOPSubscription, error) {
 
 	if c.err != nil {
 		return nil, c.err
 	}
 
-	method := pathAPIVOPUnenrollUserURL.method
-	requestURL := c.prepareAPIURL(pathAPIVOPUnenrollUserURL)
+	method := pathDeleteVOPSubscription.method
+	requestURL := c.prepareAPIURL(pathDeleteVOPSubscription)
+	requestURL = strings.ReplaceAll(requestURL, "{customer_id}", request.TokenizedCustomerID)
 
-	response := new(ResponseVOPItem)
-	if err := c.httpAPI(method, requestURL, request, response); err != nil {
-		return nil, err
-	}
-
-	if response.Err != nil {
-		return response, errors.New(response.Err.Message)
-	}
-
-	return response, nil
-}
-
-// VOPEnrollCard :
-func (c Client) VOPEnrollCard(request RequestVOPEnrollCard) (*ResponseVOPCardItem, error) {
-
-	if c.err != nil {
-		return nil, c.err
-	}
-
-	method := pathAPIVOPEnrollCardURL.method
-	requestURL := c.prepareAPIURL(pathAPIVOPEnrollCardURL)
-
-	response := new(ResponseVOPCardItem)
-	if err := c.httpAPI(method, requestURL, request, response); err != nil {
-		return nil, err
-	}
-
-	if response.Err != nil {
-		return response, errors.New(response.Err.Message)
-	}
-
-	return response, nil
-}
-
-// VOPUnenrollCard :
-func (c Client) VOPUnenrollCard(request RequestVOPUnenrollCard) (*ResponseVOPItem, error) {
-
-	if c.err != nil {
-		return nil, c.err
-	}
-
-	method := pathAPIVOPUnenrollCardURL.method
-	requestURL := c.prepareAPIURL(pathAPIVOPUnenrollCardURL)
-
-	response := new(ResponseVOPItem)
-	if err := c.httpAPI(method, requestURL, request, response); err != nil {
-		return nil, err
-	}
-
-	if response.Err != nil {
-		return response, errors.New(response.Err.Message)
-	}
-
-	return response, nil
-}
-
-// VOPWebhook :
-func (c Client) VOPWebhook(request RequestVOPWebhook) (*ResponseVOPItem, error) {
-
-	if c.err != nil {
-		return nil, c.err
-	}
-
-	method := pathAPIVOPWebhookURL.method
-	requestURL := fmt.Sprintf("%s%s", c.getAPIURL(), pathAPIVOPWebhookURL.urlPath)
-
-	response := new(ResponseVOPItem)
-	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+	response := new(ResponseVOPSubscription)
+	if err := c.httpAPI(method, requestURL, nil, response); err != nil {
 		return nil, err
 	}
 
