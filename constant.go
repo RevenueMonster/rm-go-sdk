@@ -139,3 +139,6 @@ var pathDeleteVOPSubscription = newPath(methodDELETE, "/customer/{customer_id}/s
 
 // loyalty
 var pathRegisterLoyaltyMember = newPath(methodPOST, "/loyalty/member")
+var pathGetLoyaltyMemberByID = newPath(methodGET, "/loyalty/member/{member_id}")
+var pathLoyaltyCreditMemberTopUpOnline = newPath(methodPOST, "/loyalty/member/{member_id}/topup-online")
+var pathLoyaltyCreditMemberTopUpOffline = newPath(methodPOST, "/loyalty/member/{member_id}/topup-offline")
