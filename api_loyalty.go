@@ -99,7 +99,7 @@ func (c Client) GetLoyaltyMemberByID(request RequestGetLoyaltyMemberByID) (*Resp
 
 	method := pathGetLoyaltyMemberByID.method
 	requestURL := c.prepareAPIURL(pathGetLoyaltyMemberByID)
-	requestURL = strings.ReplaceAll(requestURL, "{memberId}", request.MemberID)
+	requestURL = strings.ReplaceAll(requestURL, "{member_id}", request.MemberID)
 	response := new(ResponseGetLoyaltyMemberByID)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
