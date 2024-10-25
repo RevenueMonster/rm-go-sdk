@@ -56,8 +56,7 @@ func (c Client) RegisterLoyaltyMember(request RequestRegisterLoyaltyMember) (*Re
 	if response.Err != nil {
 		return nil, errors.New(response.Err.Message)
 	}
-
-	return nil, nil
+	return response, nil
 }
 
 type RequestGetLoyaltyMemberByID struct {
