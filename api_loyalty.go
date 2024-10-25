@@ -4,8 +4,6 @@ import (
 	"errors"
 	"strings"
 	"time"
-
-	"cloud.google.com/go/datastore"
 )
 
 // requestRegisterLoyaltyMember :
@@ -56,8 +54,7 @@ func (c Client) RegisterLoyaltyMember(request RequestRegisterLoyaltyMember) (*Re
 	if response.Err != nil {
 		return nil, errors.New(response.Err.Message)
 	}
-
-	return nil, nil
+	return response, nil
 }
 
 type RequestGetLoyaltyMemberByID struct {
@@ -71,26 +68,26 @@ type ResponseGetLoyaltyMemberByID struct {
 }
 
 type MerchantMember struct {
-	Key             *datastore.Key `json:"-"`
-	ID              string         `json:"id"`
-	Name            string         `json:"name"`
-	Email           string         `json:"email"`
-	NRIC            string         `json:"nric"`
-	Passport        string         `json:"passport"`
-	Address         string         `json:"address"`
-	Gender          string         `json:"gender"`
-	State           string         `json:"state"`
-	ReferralCode    string         `json:"referralCode"`
-	BirthDate       time.Time      `json:"birthDate"`
-	LoyaltyPoint    uint64         `json:"loyaltyPoint"`
-	Credit          uint64         `json:"credit"`
-	CountryCode     string         `json:"countryCode"`
-	PhoneNumber     string         `json:"phoneNumber"`
-	ProfileImageURL string         `json:"profileImageURL"`
-	HasPinCode      bool           `json:"hasPinCode"`
-	MemberTier      *string        `json:"memberTier"`
-	Status          string         `json:"status"`
-	CreatedDateTime time.Time      `json:"createdDateTime"`
+	Key             string    `json:"-"`
+	ID              string    `json:"id"`
+	Name            string    `json:"name"`
+	Email           string    `json:"email"`
+	NRIC            string    `json:"nric"`
+	Passport        string    `json:"passport"`
+	Address         string    `json:"address"`
+	Gender          string    `json:"gender"`
+	State           string    `json:"state"`
+	ReferralCode    string    `json:"referralCode"`
+	BirthDate       time.Time `json:"birthDate"`
+	LoyaltyPoint    uint64    `json:"loyaltyPoint"`
+	Credit          uint64    `json:"credit"`
+	CountryCode     string    `json:"countryCode"`
+	PhoneNumber     string    `json:"phoneNumber"`
+	ProfileImageURL string    `json:"profileImageURL"`
+	HasPinCode      bool      `json:"hasPinCode"`
+	MemberTier      *string   `json:"memberTier"`
+	Status          string    `json:"status"`
+	CreatedDateTime time.Time `json:"createdDateTime"`
 }
 
 func (c Client) GetLoyaltyMemberByID(request RequestGetLoyaltyMemberByID) (*ResponseGetLoyaltyMemberByID, error) {
@@ -100,7 +97,7 @@ func (c Client) GetLoyaltyMemberByID(request RequestGetLoyaltyMemberByID) (*Resp
 
 	method := pathGetLoyaltyMemberByID.method
 	requestURL := c.prepareAPIURL(pathGetLoyaltyMemberByID)
-	requestURL = strings.ReplaceAll(requestURL, "{memberId}", request.MemberID)
+	requestURL = strings.ReplaceAll(requestURL, "{member_id}", request.MemberID)
 	response := new(ResponseGetLoyaltyMemberByID)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
