@@ -29,10 +29,10 @@ The golang version 1.11 and above
 - [x] Payment (Quick Pay) - Get All Payment Transaction By ID
 - [] Payment (Quick Pay) - Get All Payment Transaction By OrderID
 - [ ] Payment (Quick Pay) - Daily Settlement Report
-- [ ] Register Loyalty Member
+- [x] Register Loyalty Member
 - [ ] Give Loyalty Point
 - [ ] Get Loyalty Members
-- [ ] Get Loyalty Member
+- [x] Get Loyalty Member
 - [ ] Get Loyalty Member Point History
 - [ ] Issue Voucher
 - [ ] Void Voucher

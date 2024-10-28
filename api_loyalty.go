@@ -6,29 +6,90 @@ import (
 	"time"
 )
 
+// RequestCheckMemberExist :
+type RequestCheckMemberExist struct {
+	PhoneNumber string `json:"phoneNumber" validate:"required"`
+	CountryCode string `json:"countryCode" validate:"required"`
+}
+
+// ResponseCheckMemberExist :
+type ResponseCheckMemberExist struct {
+	Item struct {
+		Exist bool `json:"exist"`
+	} `json:"item"`
+	Code string `json:"code"`
+	Err  *Error `json:"error"`
+}
+
+func (c Client) CheckMemberExist(request RequestCheckMemberExist) (*ResponseCheckMemberExist, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathCheckMemberExist.method
+	requestURL := c.prepareAPIURL(pathCheckMemberExist)
+	response := new(ResponseCheckMemberExist)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+	return response, nil
+}
+
 // requestRegisterLoyaltyMember :
+
 type RequestRegisterLoyaltyMember struct {
-	Name        string    `json:"name" validate:"required"`
-	CountryCode string    `json:"countryCode" validate:"required,numeric,min=1,max=4"`
-	PhoneNumber string    `json:"phoneNumber" validate:"required,numeric,min=7,max=12"`
-	Email       string    `json:"email" validate:"omitempty,email"`
-	NRIC        string    `json:"nric,omitempty"`
-	Passport    string    `json:"passport,omitempty"`
-	BirthDate   time.Time `json:"birthDate,omitempty"`
-	Gender      string    `json:"gender" validate:"omitempty,eq=MALE|eq=FEMALE"`
-	State       string    `json:"state,omitempty"`
-	Address     struct {
-		AddressLine1 string `json:"addressLine1,omitempty"`
-		AddressLine2 string `json:"addressLine2,omitempty"`
-		Postcode     string `json:"postcode,omitempty" validate:"omitempty,numeric"`
-		City         string `json:"city,omitempty"`
-		State        string `json:"state,omitempty"`
-		Country      string `json:"country,omitempty"`
-	} `json:"address,omitempty"`
-	Point        uint64 `json:"loyaltyPoint"`
-	Status       string `json:"status"`
-	Error        string `json:"error"`
-	ReferralCode string `json:"referralCode,omitempty"`
+	ID              string             `json:"id"`
+	Name            string             `json:"name"`
+	Email           string             `json:"email"`
+	NRIC            string             `json:"nric"`
+	Passport        string             `json:"passport"`
+	Address         Address            `json:"address,omitempty"`
+	Gender          string             `json:"gender"`
+	State           string             `json:"state"`
+	ReferralCode    string             `json:"referralCode"`
+	BirthDate       time.Time          `json:"birthDate"`
+	LoyaltyPoint    uint64             `json:"loyaltyPoint"`
+	Credit          uint64             `json:"credit"`
+	CountryCode     string             `json:"countryCode"`
+	PhoneNumber     string             `json:"phoneNumber"`
+	ProfileImageURL string             `json:"profileImageURL"`
+	HasPinCode      bool               `json:"hasPinCode"`
+	MemberTier      *LoyaltyMemberTier `json:"memberTier"`
+	Status          string             `json:"status"`
+	CreatedDateTime time.Time          `json:"createdDateTime"`
+}
+
+type Address struct {
+	AddressLine1 string `json:"addressLine1"`
+	AddressLine2 string `json:"addressLine2"`
+	Postcode     string `json:"postcode"`
+	City         string `json:"city"`
+	State        string `json:"state"`
+	Country      string `json:"country"`
+}
+
+type LoyaltyMemberTier struct {
+	Label        string                     `json:"label"`
+	MinimumPoint uint64                     `json:"minimumPoint"`
+	Description  []string                   `json:"description"`
+	Discount     *LoyaltyMemberTierDiscount `json:"discount"`
+	CreatedAt    time.Time                  `bson:"createdAt" json:"createdAt"`
+	UpdatedAt    time.Time                  `bson:"updatedAt" json:"updatedAt"`
+}
+
+const (
+	LoyaltyMemberTierDiscountTypeCash     = "CASH"
+	LoyaltyMemberTierDiscountTypeDiscount = "DISCOUNT"
+)
+
+type LoyaltyMemberTierDiscount struct {
+	Type               string
+	Amount             uint64
+	MinimumSpendAmount uint64
 }
 
 // responseRegisterLoyaltyMember :
@@ -52,7 +113,7 @@ func (c Client) RegisterLoyaltyMember(request RequestRegisterLoyaltyMember) (*Re
 	}
 
 	if response.Err != nil {
-		return nil, errors.New(response.Err.Message)
+		return response, errors.New(response.Err.Message)
 	}
 	return response, nil
 }
@@ -110,9 +171,43 @@ func (c Client) GetLoyaltyMemberByID(request RequestGetLoyaltyMemberByID) (*Resp
 	return response, nil
 }
 
+// RequestGetLoyaltyMember :
+type RequestGetLoyaltyMember struct {
+	PhoneNumber string `json:"phoneNumber" validate:"required"`
+	CountryCode string `json:"countryCode" validate:"required"`
+}
+
+// ResponseGetLoyaltyMember :
+type ResponseGetLoyaltyMember struct {
+	Item *MerchantMember `json:"item"`
+	Code string          `json:"code"`
+	Err  *Error          `json:"error"`
+}
+
+func (c Client) GetLoyaltyMember(request RequestGetLoyaltyMember) (*ResponseGetLoyaltyMember, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathGetLoyaltyMember.method
+	requestURL := c.prepareAPIURL(pathGetLoyaltyMember)
+	requestURL = strings.ReplaceAll(requestURL, "{country_code}", request.CountryCode)
+	requestURL = strings.ReplaceAll(requestURL, "{phone_number}", request.PhoneNumber)
+	response := new(ResponseGetLoyaltyMember)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return nil, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
+
 type RequestLoyaltyCreditMemberTopUpOnline struct {
-	TopUpAmount int    `json:"topUpAmount validate:"required"`
-	RedirectURL string `json:"redirectURL validate:"required"`
+	TopUpAmount int    `json:"topUpAmount" validate:"required"`
+	RedirectURL string `json:"redirectURL" validate:"required"`
 }
 
 type ResponseLoyaltyCreditMemberTopUpOnline struct {
