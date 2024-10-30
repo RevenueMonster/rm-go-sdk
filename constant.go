@@ -136,3 +136,10 @@ var pathAPIGetFpxBankList = newPath(methodGET, "/payment/fpx-bank")
 // Visa Offers Platform
 var pathCreateVOPSubscription = newPath(methodPOST, "/customer/{customer_id}/subscription")
 var pathDeleteVOPSubscription = newPath(methodDELETE, "/customer/{customer_id}/subscription")
+
+// loyalty
+var pathRegisterLoyaltyMember = newPath(methodPOST, "/loyalty/member")
+var pathGetLoyaltyMemberByID = newPath(methodGET, "/loyalty/member/{member_id}")
+var pathGetLoyaltyMember = newPath(methodGET, "/loyalty/me?countryCode={country_code}&phoneNumber={phone_number}")
+var pathLoyaltyCreditMemberTopUpOnline = newPath(methodPOST, "/loyalty/member/{member_id}/topup-online")
+var pathCheckMemberExist = newPath(methodPOST, "/loyalty/member/check")
