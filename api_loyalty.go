@@ -135,7 +135,7 @@ type MerchantMember struct {
 	Email           string    `json:"email"`
 	NRIC            string    `json:"nric"`
 	Passport        string    `json:"passport"`
-	Address         string    `json:"address"`
+	Address         Address   `json:"address"`
 	Gender          string    `json:"gender"`
 	State           string    `json:"state"`
 	ReferralCode    string    `json:"referralCode"`
@@ -179,9 +179,9 @@ type RequestGetLoyaltyMember struct {
 
 // ResponseGetLoyaltyMember :
 type ResponseGetLoyaltyMember struct {
-	Item *MerchantMember `json:"item"`
-	Code string          `json:"code"`
-	Err  *Error          `json:"error"`
+	Item MerchantMember `json:"item"`
+	Code string         `json:"code"`
+	Err  *Error         `json:"error"`
 }
 
 func (c Client) GetLoyaltyMember(request RequestGetLoyaltyMember) (*ResponseGetLoyaltyMember, error) {
@@ -206,6 +206,7 @@ func (c Client) GetLoyaltyMember(request RequestGetLoyaltyMember) (*ResponseGetL
 }
 
 type RequestLoyaltyCreditMemberTopUpOnline struct {
+	MemberID    string `json:"memberId" validate:"required"`
 	TopUpAmount int    `json:"topUpAmount" validate:"required"`
 	RedirectURL string `json:"redirectURL" validate:"required"`
 }
@@ -224,6 +225,7 @@ func (c Client) LoyaltyCreditMemberTopUpOnline(request RequestLoyaltyCreditMembe
 
 	method := pathLoyaltyCreditMemberTopUpOnline.method
 	requestURL := c.prepareAPIURL(pathLoyaltyCreditMemberTopUpOnline)
+	requestURL = strings.ReplaceAll(requestURL, "{member_id}", request.MemberID)
 	response := new(ResponseLoyaltyCreditMemberTopUpOnline)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
