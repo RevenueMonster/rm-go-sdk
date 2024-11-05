@@ -237,3 +237,129 @@ func (c Client) LoyaltyCreditMemberTopUpOnline(request RequestLoyaltyCreditMembe
 
 	return response, nil
 }
+
+type RequestSpendBalance struct {
+	AuthCode string `json:"authCode" validate:"required"`
+	StoreID  int64  `json:"storeId,string" validate:"required"`
+	Order    Order  `json:"order" validate:"required"`
+}
+
+type Order struct {
+	ID             string `json:"id" validate:"required"`
+	Title          string `json:"title" validate:"required"`
+	Detail         string `json:"detail"`
+	AdditionalData string `json:"additionalData,omitempty"`
+	Amount         uint64 `json:"amount"`
+}
+
+type MemberProfile struct {
+	ID                  string             `json:"id" goloquent:"-"`
+	Key                 *string            `json:"key" goloquent:"__key__"`
+	MerchantKey         *string            `json:"-"`
+	Name                string             `json:"name"`
+	Email               string             `json:"email"`
+	NRIC                string             `json:"nric"`
+	Passport            string             `json:"passport"`
+	ReferralCode        string             `json:"referralCode"`
+	BirthDate           time.Time          `json:"-"`
+	BirthDateAt         string             `json:"birthDate" goloquent:"-"`
+	Gender              string             `json:"gender"`
+	State               string             `json:"state"`
+	Address             Address            `json:"address" goloquent:",flatten"`
+	ShippingAddress     []byte             `json:"-"`
+	MemberTier          *LoyaltyMemberTier `json:"memberTier" goloquent:"-"`
+	TotalLoyaltyPoint   uint64             `json:"totalLoyaltyPoint"`
+	HasPinCode          bool               `json:"hasPinCode"`
+	PinCodeSalt         []byte             `json:"-"`
+	PinCodeHash         []byte             `json:"-"`
+	LoyaltyPointBalance uint64             `json:"loyaltyPointBalance" goloquent:"-"`
+	SpendingPoint       uint64             `json:"spendingPoint"`
+	CreditBalance       uint64             `json:"creditBalance"`
+	Status              string             `json:"status"`
+	Payload             []byte             `json:"-"`
+	CreatedAt           time.Time          `json:"createdAt"`
+	UpdatedAt           time.Time          `json:"updatedAt"`
+}
+
+type LoyaltyTransaction struct {
+	ID            string         `json:"id" goloquent:"-"`
+	Key           *string        `json:"-" goloquent:"__key__"`
+	MerchantKey   *string        `json:"-"`
+	StoreKey      *string        `json:"-"`
+	MemberKey     *string        `json:"-"`
+	Store         *Store         `json:"store,omitempty" goloquent:"-"`
+	MemberProfile *MemberProfile `json:"memberProfile,omitempty" goloquent:"-"`
+	TransactionID string         `json:"transactionId"`
+	Method        string         `json:"method" goloquent:"-"`
+	Type          string         `json:"type"`
+	Order         struct {
+		ID             string `json:"id" qson:"Order.ID"`
+		Title          string `json:"title"`
+		Detail         string `json:"detail" goloquent:",longtext"`
+		AdditionalData string `json:"additionalData,omitempty"`
+		Amount         uint64 `json:"amount"`
+	} `json:"order" goloquent:",flatten"`
+	TerminalID          string    `json:"terminalId"`
+	CurrencyType        string    `json:"currencyType"`
+	TransactionDateTime time.Time `json:"transactionAt"`
+	Status              string    `json:"status"`
+	Payload             []byte    `json:"-"`
+	CreatedAt           time.Time `json:"createdAt"`
+	UpdatedAt           time.Time `json:"updatedAt"`
+}
+
+type ResponseSpendBalance struct {
+	Item *LoyaltyTransaction `json:"item"`
+	Code string              `json:"code"`
+	Err  *Error              `json:"error"`
+}
+
+func (c Client) SpendBalance(request RequestSpendBalance) (*ResponseSpendBalance, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathSpendBalance.method
+	requestURL := c.prepareAPIURL(pathSpendBalance)
+	response := new(ResponseSpendBalance)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return nil, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
+
+type RequestRefundBalance struct {
+	BalanceID    string `json:"balanceId" validate:"required"`
+	Amount       uint64 `json:"amount" validate:"requiredif=IsFullRefund:false"`
+	IsFullRefund bool   `json:"isFullRefund"`
+}
+
+type ResponseRefundBalance struct {
+	Item *LoyaltyTransaction `json:"item"`
+	Code string              `json:"code"`
+	Err  *Error              `json:"error"`
+}
+
+func (c Client) RefundBalance(request RequestRefundBalance) (*ResponseRefundBalance, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathRefundBalance.method
+	requestURL := c.prepareAPIURL(pathRefundBalance)
+	response := new(ResponseRefundBalance)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return nil, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
