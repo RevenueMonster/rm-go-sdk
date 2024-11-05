@@ -39,6 +39,8 @@ const (
 const productionAPIURL = "https://open.revenuemonster.my"
 const sandboxAPIURL = "https://sb-open.revenuemonster.my"
 
+// const sandboxAPIURL = "http://local-open.revenuemonster.my:2001"
+
 // oauthdomain
 const productionOAuthURL = "https://oauth.revenuemonster.my"
 const sandboxOAuthURL = "https://sb-oauth.revenuemonster.my"
@@ -138,8 +140,10 @@ var pathCreateVOPSubscription = newPath(methodPOST, "/customer/{customer_id}/sub
 var pathDeleteVOPSubscription = newPath(methodDELETE, "/customer/{customer_id}/subscription")
 
 // loyalty
+var pathCheckMemberExist = newPath(methodPOST, "/loyalty/member/check")
 var pathRegisterLoyaltyMember = newPath(methodPOST, "/loyalty/member")
 var pathGetLoyaltyMemberByID = newPath(methodGET, "/loyalty/member/{member_id}")
 var pathGetLoyaltyMember = newPath(methodGET, "/loyalty/me?countryCode={country_code}&phoneNumber={phone_number}")
 var pathLoyaltyCreditMemberTopUpOnline = newPath(methodPOST, "/loyalty/member/{member_id}/topup-online")
-var pathCheckMemberExist = newPath(methodPOST, "/loyalty/member/check")
+var pathSpendBalance = newPath(methodPOST, "/loyalty/balance/spend")
+var pathRefundBalance = newPath(methodPOST, "/loyalty/balance/refund")
