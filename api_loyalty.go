@@ -212,9 +212,13 @@ type RequestLoyaltyCreditMemberTopUpOnline struct {
 }
 
 type ResponseLoyaltyCreditMemberTopUpOnline struct {
-	Item *string `json:"item"`
-	Code string  `json:"code"`
-	Err  *Error  `json:"error"`
+	Code string      `json:"code"`
+	Err  *Error      `json:"error"`
+	Item *PaymentUrl `json:"item"`
+}
+
+type PaymentUrl struct {
+	PaymentUrl string `json:"paymentUrl"`
 }
 
 func (c Client) LoyaltyCreditMemberTopUpOnline(request RequestLoyaltyCreditMemberTopUpOnline) (*ResponseLoyaltyCreditMemberTopUpOnline, error) {
@@ -226,6 +230,7 @@ func (c Client) LoyaltyCreditMemberTopUpOnline(request RequestLoyaltyCreditMembe
 	method := pathLoyaltyCreditMemberTopUpOnline.method
 	requestURL := c.prepareAPIURL(pathLoyaltyCreditMemberTopUpOnline)
 	requestURL = strings.ReplaceAll(requestURL, "{member_id}", request.MemberID)
+
 	response := new(ResponseLoyaltyCreditMemberTopUpOnline)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
