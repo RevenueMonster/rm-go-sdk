@@ -38,9 +38,9 @@ const (
 // api domain
 const productionAPIURL = "https://open.revenuemonster.my"
 
-const sandboxAPIURL = "https://sb-open.revenuemonster.my"
+// const sandboxAPIURL = "https://sb-open.revenuemonster.my"
 
-// const sandboxAPIURL = "http://local-open.revenuemonster.my:2001"
+const sandboxAPIURL = "http://local-open.revenuemonster.my:2001"
 
 // oauthdomain
 const productionOAuthURL = "https://oauth.revenuemonster.my"

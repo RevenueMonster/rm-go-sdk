@@ -41,7 +41,7 @@ func (c Client) CheckMemberExist(request RequestCheckMemberExist) (*ResponseChec
 
 // requestRegisterLoyaltyMember :
 
-type RequestRegisterLoyaltyMember struct {
+type LoyaltyMember struct {
 	ID              string             `json:"id"`
 	Name            string             `json:"name"`
 	Email           string             `json:"email"`
@@ -94,12 +94,12 @@ type LoyaltyMemberTierDiscount struct {
 
 // responseRegisterLoyaltyMember :
 type ResponseRegisterLoyaltyMember struct {
-	Item RequestRegisterLoyaltyMember `json:"item"`
-	Code string                       `json:"code"`
-	Err  *Error                       `json:"error"`
+	Item LoyaltyMember `json:"item"`
+	Code string        `json:"code"`
+	Err  *Error        `json:"error"`
 }
 
-func (c Client) RegisterLoyaltyMember(request RequestRegisterLoyaltyMember) (*ResponseRegisterLoyaltyMember, error) {
+func (c Client) RegisterLoyaltyMember(request LoyaltyMember) (*ResponseRegisterLoyaltyMember, error) {
 	if c.err != nil {
 		return nil, c.err
 	}
@@ -123,32 +123,9 @@ type RequestGetLoyaltyMemberByID struct {
 }
 
 type ResponseGetLoyaltyMemberByID struct {
-	Item RequestRegisterLoyaltyMember `json:"item"`
-	Code string                       `json:"code"`
-	Err  *Error                       `json:"error"`
-}
-
-type MerchantMember struct {
-	Key             string    `json:"-"`
-	ID              string    `json:"id"`
-	Name            string    `json:"name"`
-	Email           string    `json:"email"`
-	NRIC            string    `json:"nric"`
-	Passport        string    `json:"passport"`
-	Address         Address   `json:"address"`
-	Gender          string    `json:"gender"`
-	State           string    `json:"state"`
-	ReferralCode    string    `json:"referralCode"`
-	BirthDate       time.Time `json:"birthDate"`
-	LoyaltyPoint    uint64    `json:"loyaltyPoint"`
-	Credit          uint64    `json:"credit"`
-	CountryCode     string    `json:"countryCode"`
-	PhoneNumber     string    `json:"phoneNumber"`
-	ProfileImageURL string    `json:"profileImageURL"`
-	HasPinCode      bool      `json:"hasPinCode"`
-	MemberTier      *string   `json:"memberTier"`
-	Status          string    `json:"status"`
-	CreatedDateTime time.Time `json:"createdDateTime"`
+	Item LoyaltyMember `json:"item"`
+	Code string        `json:"code"`
+	Err  *Error        `json:"error"`
 }
 
 func (c Client) GetLoyaltyMemberByID(request RequestGetLoyaltyMemberByID) (*ResponseGetLoyaltyMemberByID, error) {
@@ -179,9 +156,9 @@ type RequestGetLoyaltyMember struct {
 
 // ResponseGetLoyaltyMember :
 type ResponseGetLoyaltyMember struct {
-	Item MerchantMember `json:"item"`
-	Code string         `json:"code"`
-	Err  *Error         `json:"error"`
+	Item LoyaltyMember `json:"item"`
+	Code string        `json:"code"`
+	Err  *Error        `json:"error"`
 }
 
 func (c Client) GetLoyaltyMember(request RequestGetLoyaltyMember) (*ResponseGetLoyaltyMember, error) {
