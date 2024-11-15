@@ -220,10 +220,38 @@ func (c Client) LoyaltyCreditMemberTopUpOnline(request RequestLoyaltyCreditMembe
 	return response, nil
 }
 
+type ResponseGetMemberKey struct {
+	Item string `json:"item"`
+	Code string `json:"code"`
+	Err  *Error `json:"error"`
+}
+
+func (c Client) GetMemberKey(request RequestGetLoyaltyMember) (*ResponseGetMemberKey, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathGetMemberKey.method
+	requestURL := c.prepareAPIURL(pathGetMemberKey)
+	requestURL = strings.ReplaceAll(requestURL, "{country_code}", request.CountryCode)
+	requestURL = strings.ReplaceAll(requestURL, "{phone_number}", request.PhoneNumber)
+	response := new(ResponseGetMemberKey)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return nil, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
+
 type RequestSpendBalance struct {
-	AuthCode string `json:"authCode" validate:"required"`
-	StoreID  int64  `json:"storeId,string" validate:"required"`
-	Order    Order  `json:"order" validate:"required"`
+	MemberProfileKeyStr string `json:"memberProfileKeyStr" validate:"omitempty"`
+	AuthCode            string `json:"authCode" validate:"required"`
+	StoreID             int64  `json:"storeId,string" validate:"required"`
+	Order               Order  `json:"order" validate:"required"`
 }
 
 type Order struct {
