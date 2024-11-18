@@ -37,6 +37,7 @@ const (
 
 // api domain
 const productionAPIURL = "https://open.revenuemonster.my"
+
 const sandboxAPIURL = "https://sb-open.revenuemonster.my"
 
 // const sandboxAPIURL = "http://local-open.revenuemonster.my:2001"
@@ -145,5 +146,6 @@ var pathRegisterLoyaltyMember = newPath(methodPOST, "/loyalty/member")
 var pathGetLoyaltyMemberByID = newPath(methodGET, "/loyalty/member/{member_id}")
 var pathGetLoyaltyMember = newPath(methodGET, "/loyalty/me?countryCode={country_code}&phoneNumber={phone_number}")
 var pathLoyaltyCreditMemberTopUpOnline = newPath(methodPOST, "/loyalty/member/{member_id}/topup-online")
+var pathGetMemberKey = newPath(methodGET, "/loyalty/me/key?countryCode={country_code}&phoneNumber={phone_number}")
 var pathSpendBalance = newPath(methodPOST, "/loyalty/balance/spend")
 var pathRefundBalance = newPath(methodPOST, "/loyalty/balance/refund")
