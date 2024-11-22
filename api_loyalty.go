@@ -41,7 +41,7 @@ func (c Client) CheckMemberExist(request RequestCheckMemberExist) (*ResponseChec
 
 // requestRegisterLoyaltyMember :
 
-type LoyaltyMember struct {
+type RequestRegisterLoyaltyMember struct {
 	ID              string             `json:"id"`
 	Name            string             `json:"name"`
 	Email           string             `json:"email"`
@@ -63,43 +63,14 @@ type LoyaltyMember struct {
 	CreatedDateTime time.Time          `json:"createdDateTime"`
 }
 
-type Address struct {
-	AddressLine1 string `json:"addressLine1"`
-	AddressLine2 string `json:"addressLine2"`
-	Postcode     string `json:"postcode"`
-	City         string `json:"city"`
-	State        string `json:"state"`
-	Country      string `json:"country"`
-}
-
-type LoyaltyMemberTier struct {
-	Label        string                     `json:"label"`
-	MinimumPoint uint64                     `json:"minimumPoint"`
-	Description  []string                   `json:"description"`
-	Discount     *LoyaltyMemberTierDiscount `json:"discount"`
-	CreatedAt    time.Time                  `bson:"createdAt" json:"createdAt"`
-	UpdatedAt    time.Time                  `bson:"updatedAt" json:"updatedAt"`
-}
-
-const (
-	LoyaltyMemberTierDiscountTypeCash     = "CASH"
-	LoyaltyMemberTierDiscountTypeDiscount = "DISCOUNT"
-)
-
-type LoyaltyMemberTierDiscount struct {
-	Type               string
-	Amount             uint64
-	MinimumSpendAmount uint64
-}
-
 // responseRegisterLoyaltyMember :
 type ResponseRegisterLoyaltyMember struct {
-	Item LoyaltyMember `json:"item"`
-	Code string        `json:"code"`
-	Err  *Error        `json:"error"`
+	Item RequestRegisterLoyaltyMember `json:"item"`
+	Code string                       `json:"code"`
+	Err  *Error                       `json:"error"`
 }
 
-func (c Client) RegisterLoyaltyMember(request LoyaltyMember) (*ResponseRegisterLoyaltyMember, error) {
+func (c Client) RegisterLoyaltyMember(request RequestRegisterLoyaltyMember) (*ResponseRegisterLoyaltyMember, error) {
 	if c.err != nil {
 		return nil, c.err
 	}
