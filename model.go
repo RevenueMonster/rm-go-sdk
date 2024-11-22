@@ -251,3 +251,54 @@ type VoucherBatch struct {
 	CreatedAt      time.Time `json:"createdAt"`
 	UpdatedAt      time.Time `json:"updatedAt"`
 }
+
+type LoyaltyMember struct {
+	ID              string             `json:"id"`
+	Name            string             `json:"name"`
+	Email           string             `json:"email"`
+	NRIC            string             `json:"nric"`
+	Passport        string             `json:"passport"`
+	Address         Address            `json:"address,omitempty"`
+	Gender          string             `json:"gender"`
+	State           string             `json:"state"`
+	ReferralCode    string             `json:"referralCode"`
+	BirthDate       time.Time          `json:"birthDate"`
+	LoyaltyPoint    uint64             `json:"loyaltyPoint"`
+	Credit          uint64             `json:"credit"`
+	CountryCode     string             `json:"countryCode"`
+	PhoneNumber     string             `json:"phoneNumber"`
+	ProfileImageURL string             `json:"profileImageURL"`
+	HasPinCode      bool               `json:"hasPinCode"`
+	MemberTier      *LoyaltyMemberTier `json:"memberTier"`
+	Status          string             `json:"status"`
+	CreatedDateTime time.Time          `json:"createdDateTime"`
+}
+
+type Address struct {
+	AddressLine1 string `json:"addressLine1"`
+	AddressLine2 string `json:"addressLine2"`
+	Postcode     string `json:"postcode"`
+	City         string `json:"city"`
+	State        string `json:"state"`
+	Country      string `json:"country"`
+}
+
+type LoyaltyMemberTier struct {
+	Label        string                     `json:"label"`
+	MinimumPoint uint64                     `json:"minimumPoint"`
+	Description  []string                   `json:"description"`
+	Discount     *LoyaltyMemberTierDiscount `json:"discount"`
+	CreatedAt    time.Time                  `bson:"createdAt" json:"createdAt"`
+	UpdatedAt    time.Time                  `bson:"updatedAt" json:"updatedAt"`
+}
+
+const (
+	LoyaltyMemberTierDiscountTypeCash     = "CASH"
+	LoyaltyMemberTierDiscountTypeDiscount = "DISCOUNT"
+)
+
+type LoyaltyMemberTierDiscount struct {
+	Type               string
+	Amount             uint64
+	MinimumSpendAmount uint64
+}
