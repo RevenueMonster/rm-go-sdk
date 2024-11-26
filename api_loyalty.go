@@ -157,6 +157,7 @@ type RequestLoyaltyCreditMemberTopUpOnline struct {
 	MemberID    string `json:"memberId" validate:"required"`
 	TopUpAmount int    `json:"topUpAmount" validate:"required"`
 	RedirectURL string `json:"redirectURL" validate:"required"`
+	Platform    string `json:"platform,omitempty"`
 }
 
 type ResponseLoyaltyCreditMemberTopUpOnline struct {
