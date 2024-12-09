@@ -52,28 +52,44 @@ The golang version 1.11 and above
 
 ### Usage
 1. "sandbox" is for sandbox environment.
+
 2. "production" is for production environment.
+
 3. Get Client ID and Client Secret from portal.
-![ClientIDClientSecret](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/clientIDclientSecret.png)
-4. Generate private key and publci key from portal.
-![PrivateKeyPublicKey](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/privateKeypublicKey.PNG)
+<img width="1001" alt="Screenshot 2023-06-07 at 12 02 21 PM" src="https://github.com/nurinsyafiqah84/testGo/assets/80868172/e4528252-e6f5-4be1-8d0c-03b05c1e03fb">
+
+4. Generate private key and public key from portal.
+<img width="1047" alt="Screenshot 2023-06-07 at 12 39 34 PM" src="https://github.com/nurinsyafiqah84/testGo/assets/80868172/145444d6-eb7e-4e7e-9daf-6105bf63e5e5">
+
 5. Store private key for own use and public key at portal.
-![PastePublicKey](https://storage.googleapis.com/rm-portal-assets/img/rm-landing/pastePublicKey.png)
+<img width="991" alt="Screenshot 2023-06-07 at 12 46 34 PM" src="https://github.com/nurinsyafiqah84/testGo/assets/80868172/4d553d5f-f4ae-43c9-a7cb-5ccb0d829396">
+
 6. Set environment variables at begining of the project before using any of the library functions.
-```
-Environment environment = new Environment();
-environment.setEnvironment(clientId, clientSecret, "sandbox");
-```
-
-* Sample to read private key file
-```
-
+```go
+   	clientID := "client-id"
+	   clientSecret := "client-secret"
+	   environment := "sandbox"
+	   os.Setenv("CLIENT_ID", clientID)
+	   os.Setenv("CLIENT_SECRET", clientSecret)
+	   os.Setenv("ENVIRONMENT", environment)
 ```
 
 * Client Credentials (Authentication)
     * To get refresh token and access token(expired after 2 hours) with using provided clientId and clientSecret
-```
-
+``` go
+    result := NewClient(sdk.Client{
+    	ID:         "123456789",
+    	Secret:     "123456789",
+    	IsSandbox:  true,
+    	PrivateKey: []byte(`---private key---`),
+   	PublicKey:  []byte(`---public key---`),
+    })
+    token, err : result.GetAccessTokenByClientCredentials()
+    if err := nil {
+    	fmt.Println("Error getting")
+    }
+    fmt.Println(token.RefreshToken)
+    fmt.Println(token.AccessToken)
 ```
 
 * Authorization Code (Authentication)
@@ -95,57 +111,110 @@ environment.setEnvironment(clientId, clientSecret, "sandbox");
 
 * Refresh Token (Authentication)
     * To get new access token(expired after 2 hours) with using provided clientId and clientSecret (recommended to schedule to run this fucntion on every less than 2 hours) in order to avoid expired access token error
-```
+```go
+   result := NewClient(sdk.Client{
+    	ID:         "123456789",
+    	Secret:     "123456789",
+    	IsSandbox:  true,
+    	PrivateKey: []byte(`---private key---`),
+   	PublicKey:  []byte(`---public key---`),
+    })
+   token, err = result.GetAccessTokenByRefreshToken(token.RefreshToken)
+   if err != nil {
+	fmt.Printf("Error getting token info: %s\n", err.Error())
+	return
+   }
+
+   fmt.Println("New Access Token:", token.AccessToken)
 ```
 
 * Create Transaction QRCode/URL (TransactionQR)
     * To create static/dynamic QR code for user scanning merchant's displayed QR
-```
+```go
+   sdk.NewClient(sdk.Client{
+    	ID:         "123456789",
+    	Secret:     "123456789",
+    	IsSandbox:  true,
+   	PrivateKey: []byte(`---private key---`),
+    	PublicKey:  []byte(`---public key---`),
+   }).CreatePaymentTransactionQRCode(sdk.RequestCreatePaymentTransactionQRCode{
+	Amount:          100,
+	CurrencyType:    "MYR",
+	Method:          []string{"CreditCard", "PayPal"},
+	StoreID:         "1632209008580492359",
+	RedirectURL:     "https://example.com/redirect",
+	Type:            "DYNAMIC",
+	IsPreFillAmount: true,
+   })
 ```
 
 * Get Transaction QRCode/URL (TransactionQR)
     * To get all QR Code(s) generated previously in the system
-```
+```go
+   
 ```
 
 * Get Transaction QRCode/URL By Code (TransactionQR)
     * To get specific QR Code generated previously in the system, by passing in code in query parameter (/qrcode/...)
-```
-
+```go
+    sdk.NewClient(sdk.Client{
+    	ID:         "123456789",
+    	Secret:     "123456789",
+    	IsSandbox:  true,
+   	PrivateKey: []byte(`---private key---`),
+    	PublicKey:  []byte(`---public key---`),
+    }).GetPaymentTransactionQRByCode("code")
 ```
 
 * Get Transactions By Code (TransactionQR)
     * To get all transactions under existing QR code, by passing in code in query parameter (/qrcode/.../transactions)
-```
-
+```go
+   
 ```
 
 * Payment (Quick Pay) - Payment
     * To make payment by scanning barcode/authcode from user
-```
+```go
+   
 ```
 
 * Payment (Quick Pay) - Refund
     * To refund the successful transactions
-```
+```go
+ 
 ```
 
 * Payment (Quick Pay) - Reverse
     * To reverse time-out or problematic transaction
-```
+```go
+   
 ```
 
 * Payment (Quick Pay) - Get Payment Transaction By ID
     * To get details of a transaction by using transactionId
-```
+```go
+    sdk.NewClient(sdk.Client{
+    	ID:         "123456789",
+    	Secret:     "123456789",
+    	IsSandbox:  true,
+   	PrivateKey: []byte(`---private key---`),
+    	PublicKey:  []byte(`---public key---`),
+    }).GetPaymentTransactionByID("transaction-id")
 ```
 
 * Payment (Quick Pay) - Get Payment Transaction By Order ID
     * To get details of a transaction by using orderId
-```
+```go
+    sdk.NewClient(sdk.Client{
+    	ID:         "123456789",
+    	Secret:     "123456789",
+    	IsSandbox:  true,
+   	PrivateKey: []byte(`---private key---`),
+    	PublicKey:  []byte(`---public key---`),
+   }).GetPaymentTransactionByOrderID("order-id")
 ```
 
-* Push Notification ( Store ) - Send Notificaiton To Store By Store ID
+* Push Notification ( Store ) - Send Notification To Store By Store ID
 ```go
 sdk.NewClient(sdk.Client{
     ID:         "123456789",
