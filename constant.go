@@ -131,6 +131,7 @@ var pathAPIServiceWebhookURL = newPath(methodPOST, "/service/webhook")
 var pathAPICreateTokenizedPaymentCustomer = newPath(methodPOST, "/tokenized-payment")
 var pathAPIGetTokenizedPaymentCustomerByID = newPath(methodGET, "/customer/{customer_id}")
 var pathAPIToggleTokenizedPaymentCustomerStatus = newPath(methodPUT, "/customer/{customer_id}/status")
+var pathAPIGetTokenizedCustomerOrders = newPath(methodGET, "/customer/{customer_id}/orders")
 var pathAPICreateOrderWithTokenizedCustomer = newPath(methodPOST, "/customer/{customer_id}/order")
 
 // FPX

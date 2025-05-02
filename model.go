@@ -108,6 +108,23 @@ type PaymentTransaction struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
+type TokenizedPaymentOrder struct {
+	ID                  string    `json:"id"` // order ID
+	PaymentURL          string    `json:"paymentUrl"`
+	RecurringID         string    `json:"recurringPaymentId"`
+	RecurringCustomerID string    `json:"recurringCustomerId"`
+	RecurringReference  string    `json:"recurringReference"`
+	MerchantID          string    `json:"merchantId"`
+	StoreID             string    `json:"storeId"`
+	Amount              int       `json:"amount"`
+	CurrencyType        string    `json:"currency"`
+	CheckoutID          string    `json:"checkoutId"`
+	TransactionID       string    `json:"transactionId"`
+	Status              string    `json:"status"`
+	CreatedAt           time.Time `json:"createdAt"`
+	UpdatedAt           time.Time `json:"updatedAt"`
+}
+
 // Merchant :
 type Merchant struct {
 	ID                 string    `json:"id"`
