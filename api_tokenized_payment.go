@@ -135,7 +135,7 @@ type RequestCreateOrderWithTokenizedCustomer struct {
 	TokenizedCustomerID string `json:"-"`
 	Currency            string `json:"currency"`
 	Amount              int64  `json:"amount"`
-	Title               string `json:"title"` 
+	Title               string `json:"title"`
 	Description         string `json:"description"`
 }
 
@@ -157,6 +157,44 @@ func (c Client) CreateOrderWithTokenizedCustomer(request RequestCreateOrderWithT
 
 	response := new(ResponseCreateOrderWithTokenizedCustomer)
 	if err := c.httpAPI(method, requestURL, request, response); err != nil {
+		return nil, err
+	}
+
+	if response.Err != nil {
+		return response, errors.New(response.Err.Message)
+	}
+
+	return response, nil
+}
+
+type RequestGetTokenizedCustomerOrders struct {
+	TokenizedCustomerID string
+	Cursor              string
+}
+type ResponseGetTokenizedCustomerOrders struct {
+	Items []*TokenizedPaymentOrder `json:"items"`
+	Code  string                   `json:"code"`
+	Meta  *struct {
+		Cursor string `json:"cursor"`
+	} `json:"meta"`
+	Err *Error `json:"error"`
+}
+
+func (c Client) GetTokenizedCustomerOrders(request RequestGetTokenizedCustomerOrders) (*ResponseGetTokenizedCustomerOrders, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathAPIGetTokenizedCustomerOrders.method
+	requestURL := c.prepareAPIURL(pathAPIGetTokenizedCustomerOrders)
+	requestURL = strings.ReplaceAll(requestURL, "{customer_id}", request.TokenizedCustomerID)
+
+	if request.Cursor != "" {
+		requestURL += "?cursor=" + request.Cursor
+	}
+
+	response := new(ResponseGetTokenizedCustomerOrders)
+	if err := c.httpAPI(method, requestURL, nil, response); err != nil {
 		return nil, err
 	}
 
