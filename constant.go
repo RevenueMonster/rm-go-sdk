@@ -23,6 +23,7 @@ const (
 // Method
 const (
 	methodPOST   = "POST"
+	methodPATCH  = "PATCH"
 	methodGET    = "GET"
 	methodPUT    = "PUT"
 	methodDELETE = "DELETE"
@@ -119,6 +120,7 @@ var pathCancelDelivery = newPath(methodPOST, "/delivery/cancel")
 
 // Voucher
 var pathAPIVoucherVoidURL = newPath(methodPOST, "/voucher")
+var pathAPIVoucherReinstateURL = newPath(methodPATCH, "/voucher")
 var pathAPIGetVoucherByCodeURL = newPath(methodGET, "/voucher")
 var pathAPIGetVoucherBatchesURL = newPath(methodGET, "/voucher-batches")
 var pathAPIGetVoucherBatchByKeyURL = newPath(methodGET, "/voucher-batch")
