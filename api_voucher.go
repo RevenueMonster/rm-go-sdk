@@ -11,39 +11,16 @@ import (
 
 // VoucherVoidResponse :
 type VoucherVoidResponse struct {
-	Item struct {
-		Key                string      `json:"key"`
-		Label              string      `json:"label"`
-		RedemptionRuleKey  interface{} `json:"redemptionRuleKey"`
-		VoucherBatchKey    string      `json:"voucherBatchKey"`
-		Type               string      `json:"type"`
-		Amount             int         `json:"amount"`
-		DiscountRate       int         `json:"discountRate"`
-		MinimumSpendAmount int         `json:"minimumSpendAmount"`
-		Origin             string      `json:"origin"`
-		ImageURL           string      `json:"imageUrl"`
-		MemberProfile      interface{} `json:"memberProfile"`
-		RedemptionRule     interface{} `json:"redemptionRule"`
-		AssignedAt         time.Time   `json:"assignedAt"`
-		Payload            interface{} `json:"payload"`
-		QrURL              string      `json:"qrUrl"`
-		Code               string      `json:"code"`
-		IsShipping         bool        `json:"isShipping"`
-		Address            interface{} `json:"address"`
-		Expiry             struct {
-			Type      string    `json:"type"`
-			Day       int       `json:"day"`
-			ExpiredAt time.Time `json:"expiredAt"`
-		} `json:"expiry"`
-		UsedAt         time.Time `json:"usedAt"`
-		RedeemedAt     time.Time `json:"redeemedAt"`
-		IsDeviceRedeem bool      `json:"isDeviceRedeem"`
-		Status         string    `json:"status"`
-		CreatedAt      time.Time `json:"createdAt"`
-		UpdatedAt      time.Time `json:"updatedAt"`
-	} `json:"item"`
-	Code string `json:"code"`
-	Err  *Error `json:"error"`
+	Item Voucher `json:"item"`
+	Code string  `json:"code"`
+	Err  *Error  `json:"error"`
+}
+
+// VoucherReinstateResponse :
+type VoucherReinstateResponse struct {
+	Item Voucher `json:"item"`
+	Code string  `json:"code"`
+	Err  *Error  `json:"error"`
 }
 
 // GetVoucherByCodeResponse :
@@ -102,6 +79,33 @@ func (c Client) VoucherVoid(code string, usedDateTime time.Time) (*VoucherVoidRe
 		UsedDateTime time.Time `json:"usedAt"`
 	}{
 		UsedDateTime: usedDateTime,
+	}, response); err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// VoucherReinstate :
+func (c Client) VoucherReinstate(code, reason, pin string) (*VoucherReinstateResponse, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathAPIVoucherReinstateURL.method
+	requestURL := c.prepareAPIURL(pathAPIVoucherReinstateURL)
+
+	if pin == "" {
+		return nil, errors.New("pin is required for voucher reinstatement")
+	}
+
+	response := new(VoucherReinstateResponse)
+	if err := c.httpAPI(method, fmt.Sprintf("%s/%s/reinstate", requestURL, code), struct {
+		Reason string `json:"reason,omitempty"`
+		Pin    string `json:"pin"`
+	}{
+		Reason: reason,
+		Pin:    pin,
 	}, response); err != nil {
 		return nil, err
 	}
