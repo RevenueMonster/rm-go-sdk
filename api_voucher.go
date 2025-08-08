@@ -65,6 +65,18 @@ type GetVoucherBatchesResponse struct {
 	Err *Error `json:"error"`
 }
 
+// RequestGetVoucherBatches :
+type BulkRedeemVoucherRequest struct {
+	Codes []string `json:"codes"`
+}
+
+// GetVoucherBatchesResponse :
+type BulkRedeemVoucherResponse struct {
+	Item []Voucher `json:"item"`
+	Code string    `json:"code"`
+	Err  *Error    `json:"error"`
+}
+
 // VoucherVoid :
 func (c Client) VoucherVoid(code string, usedDateTime time.Time) (*VoucherVoidResponse, error) {
 	if c.err != nil {
@@ -199,6 +211,23 @@ func (c Client) GetVoucherBatchByKey(request RequestGetVoucherBatchByKey) (*GetV
 
 	response := new(GetVoucherBatchByKeyResponse)
 	if err := c.httpAPI(method, rawURL.String(), nil, response); err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// BulkRedeemVoucher :
+func (c Client) BulkRedeemVoucher(request BulkRedeemVoucherRequest) (*BulkRedeemVoucherResponse, error) {
+	if c.err != nil {
+		return nil, c.err
+	}
+
+	method := pathAPIVoucherRedeemByBulk.method
+	requestURL := c.prepareAPIURL(pathAPIVoucherRedeemByBulk)
+
+	response := new(BulkRedeemVoucherResponse)
+	if err := c.httpAPI(method, requestURL, request, response); err != nil {
 		return nil, err
 	}
 
