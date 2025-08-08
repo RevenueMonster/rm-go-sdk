@@ -214,10 +214,10 @@ type User struct {
 
 // Voucher :
 type Voucher struct {
-	Key                string      `json:"key"`
+	Key                *string     `json:"key"`
 	Label              string      `json:"label"`
 	RedemptionRuleKey  interface{} `json:"redemptionRuleKey"`
-	VoucherBatchKey    string      `json:"voucherBatchKey"`
+	VoucherBatchKey    *string     `json:"voucherBatchKey"`
 	Type               string      `json:"type"`
 	Amount             int         `json:"amount"`
 	DiscountRate       int         `json:"discountRate"`
@@ -226,23 +226,24 @@ type Voucher struct {
 	ImageURL           string      `json:"imageUrl"`
 	MemberProfile      interface{} `json:"memberProfile"`
 	RedemptionRule     interface{} `json:"redemptionRule"`
-	AssignedAt         time.Time   `json:"assignedAt"`
+	AssignedAt         *time.Time  `json:"assignedAt"`
 	Payload            interface{} `json:"payload"`
 	QrURL              string      `json:"qrUrl"`
 	Code               string      `json:"code"`
 	IsShipping         bool        `json:"isShipping"`
 	Address            string      `json:"address"`
 	Expiry             struct {
-		Type      string    `json:"type"`
-		Day       int       `json:"day"`
-		ExpiredAt time.Time `json:"expiredAt"`
+		Type      string  `json:"type"`
+		Day       int     `json:"day"`
+		ExpiredAt *string `json:"expiredAt"`
 	} `json:"expiry"`
-	UsedAt         time.Time `json:"usedAt"`
-	RedeemedAt     time.Time `json:"redeemedAt"`
-	IsDeviceRedeem bool      `json:"isDeviceRedeem"`
-	Status         string    `json:"status"`
-	CreatedAt      time.Time `json:"createdAt"`
-	UpdatedAt      time.Time `json:"updatedAt"`
+	VoucherComboKey *string    `json:"voucherComboKey"`
+	UsedAt          *time.Time `json:"usedAt"`
+	RedeemedAt      *time.Time `json:"redeemedAt"`
+	IsDeviceRedeem  bool       `json:"isDeviceRedeem"`
+	Status          string     `json:"status"`
+	CreatedAt       *time.Time `json:"createdAt"`
+	UpdatedAt       *time.Time `json:"updatedAt"`
 }
 
 // VoucherBatch :
