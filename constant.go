@@ -87,6 +87,11 @@ var pathAPIGetStoreByIDURL = newPath(methodGET, "/store")
 var pathAPIGetMerchantURL = newPath(methodGET, "/merchant")
 var pathAPIGetMerchantSubscriptionsURL = newPath(methodGET, "/merchant/subscriptions")
 
+// Account Information
+var pathAPIGetSettlementAccount = newPath(methodGET, "/account")
+var pathAPIGetSettlementAccountList = newPath(methodGET, "/accounts")
+var pathAPIGetSettlementAccountById = newPath(methodGET, "/account/{settlement_account_id}")
+
 // User Information
 var pathAPIGetUserURL = newPath(methodGET, "/user")
 
