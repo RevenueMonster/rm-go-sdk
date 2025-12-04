@@ -324,3 +324,114 @@ type LoyaltyMemberTierDiscount struct {
 	Amount             uint64
 	MinimumSpendAmount uint64
 }
+
+// MerchantSettlement :
+type MerchantSettlement struct {
+	ID                      string          `json:"id" goloquent:"__key__"`
+	MerchantID              string          `json:"merchantId"`
+	IsDefault               bool            `json:"isDefault"`
+	Name                    string          `json:"companyName"`
+	CompanyType             string          `json:"companyType"`
+	RegistrationNumber      string          `json:"registrationNumber"`
+	BusinessCategory        string          `json:"businessCategory"`
+	BusinessScope           string          `json:"businessScope" goloquent:",longtext"`
+	SourceOfFund            string          `json:"sourceOfFunds" goloquent:",longtext"`
+	CustomerOrigin          string          `json:"customerOrigin" goloquent:",longtext"`
+	EstablishedDateTime     string          `json:"establishedAt"`
+	CountryCode             string          `json:"countryCode"`
+	PhoneNumber             string          `json:"phoneNumber"`
+	AddressLine1            string          `json:"addressLine1"`
+	AddressLine2            string          `json:"addressLine2"`
+	Postcode                string          `json:"postcode"`
+	City                    string          `json:"city"`
+	State                   string          `json:"state"`
+	Country                 string          `json:"country"`
+	IsSameBusinessAddress   bool            `json:"isSameBusinessAddress"`
+	InvoiceAddress          *InvoiceAddress `json:"invoiceAddress"`
+	InspectList             []InspectList   `json:"inspectList"`
+	Status                  string          `json:"status"`
+	Document                *Document       `json:"document"`
+	DocumentFile            DocumentFile    `json:"documentFile"`
+	BankAccountNo           string          `json:"bankAccountNo"`
+	BankAccountType         string          `json:"bankAccountType"`
+	BankAccountHolderName   string          `json:"bankAccountHolderName"`
+	BankName                string          `json:"bankName" goloquent:"-"`
+	BankCode                string          `json:"bankCode"`
+	AverageTicketSize       uint64          `json:"averageTicketSize"`
+	AverageTurnoverPerMonth uint64          `json:"averageTurnoverPerMonth"`
+	PaymentSubscription     string          `json:"paymentSubscription"`
+	AgentRate               uint64          `json:"agentRate"`
+	CreatedDateTime         string          `json:"createdAt"`
+	UpdatedDateTime         string          `json:"updatedAt"`
+	TaxInfo                 TaxInfo         `json:"taxInfo"`
+	HasTaxInfo              bool            `json:"hasTaxInfo"`
+}
+
+type TaxInfo struct {
+	Tin      string `json:"tin"`
+	SstRegNo string `json:"sstRegNo"`
+	TtxRegNo string `json:"ttxRegNo"`
+	Msic     string `json:"msic"`
+}
+
+// InvoiceAddress :
+type InvoiceAddress struct {
+	AddressLine1 string `json:"addressLine1"`
+	AddressLine2 string `json:"addressLine2"`
+	Postcode     string `json:"postcode"`
+	City         string `json:"city"`
+	State        string `json:"state"`
+	Country      string `json:"country"`
+}
+
+// InspectList :
+type InspectList struct {
+	FullName      string `json:"fullName"`
+	Email         string `json:"email"`
+	Position      string `json:"position"`
+	CountryCode   string `json:"countryCode"`
+	PhoneNumber   string `json:"phoneNumber"`
+	Gender        string `json:"gender"`
+	Birthday      string `json:"birthday"`
+	Nationality   string `json:"nationality"`
+	IDType        string `json:"idType"`
+	IDNo          string `json:"idNo"`
+	BeginDateTime string `json:"beginAt"`
+	EndDateTime   string `json:"endAt"`
+}
+
+type Document struct {
+	CTOSFileURL                      string `json:"ctosFileUrl"`
+	OwnerICFileURL                   string `json:"ownerICFileUrl"`
+	DirectorICFileURL                string `json:"directorICFileUrl"`
+	ShareHolderICFileURL             string `json:"shareHolderICFileUrl"`
+	BusinessRegistrationFileURL      string `json:"businessRegistrationFileUrl"`
+	BankStatementFileURL             string `json:"bankStatementFileUrl"`
+	MOAFileURL                       string `json:"moaFileUrl"`
+	Form24FileURL                    string `json:"form24FileUrl"`
+	Form49FileURL                    string `json:"form49FileUrl"`
+	Section14FileURL                 string `json:"section14FileUrl"`
+	Form44FileURL                    string `json:"form44FileUrl"`
+	BusinessSitePhotoFileURL         string `json:"businessSitePhotoFileUrl"`
+	ESSMDocumenFileURL               string `json:"essmDocumentFileUrl"`
+	LetterOfConsentFileURL           string `json:"letterOfConsentFileUrl"`
+	CertificateOfRegistrationFileURL string `json:"certificateOfRegistrationFileUrl"`
+	MeetingMinutesFileURL            string `json:"meetingMinutesFileUrl"`
+	OrganizationChartFileURL         string `json:"organizationChartFileUrl"`
+}
+
+// DocumentFile : one of the struct in Merchant
+type DocumentFile struct {
+	CTOSFileURL                 []string
+	OwnerICFileURL              []string
+	DirectorICFileURL           []string
+	ShareHolderICFileURL        []string
+	BusinessRegistrationFileURL []string
+	BankStatementFileURL        []string
+	MOAFileURL                  []string
+	Form24FileURL               []string
+	Form49FileURL               []string
+	Section14FileURL            []string
+	Form44FileURL               []string
+	BusinessSitePhotoFileURL    []string
+}
