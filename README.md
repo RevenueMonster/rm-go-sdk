@@ -4,7 +4,7 @@ This is an Go SDK that maps some of the RESTful methods of Open API that are doc
 ## 🚀 Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-The golang version 1.11 and above
+The golang version 1.17 and above
 
 ### Covered Functions
 - [x] Signature Algorithm
@@ -31,7 +31,7 @@ The golang version 1.11 and above
 - [ ] Payment (Quick Pay) - Get All Payment Transactions
 - [x] Payment (Quick Pay) - Get All Payment Transaction By ID
 - [] Payment (Quick Pay) - Get All Payment Transaction By OrderID
-- [ ] Payment (Quick Pay) - Daily Settlement Report
+- [x] Payment (Reporting) - Reconciliation
 - [x] Loyalty - Check Member Exist
 - [x] Loyalty - Register Member
 - [x] Loyalty - Get Loyalty Members
