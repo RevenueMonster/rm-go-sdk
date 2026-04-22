@@ -79,6 +79,9 @@ var pathAPIReversedPaymentURL = newPath(methodPOST, "/payment/reverse")
 // Payment Subscription Endpoint
 var pathAPIGetPaymentSubscriptionStatus = newPath(methodGET, "/payment/subscription/status")
 
+// Payment Reconciliation
+var pathAPIPaymentReconciliationURL = newPath(methodPOST, "/payment/reconciliation")
+
 // Stores Endpoint
 var pathAPIGetStoresURL = newPath(methodGET, "/stores")
 var pathAPIGetStoreByIDURL = newPath(methodGET, "/store")
