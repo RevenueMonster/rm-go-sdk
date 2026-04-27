@@ -2,6 +2,23 @@ package sdk
 
 import "time"
 
+type BankAccountType string
+type PaymentSubscription string
+type CompanyType string
+
+const (
+	BankAccountTypeIndividual BankAccountType = "INDIVIDUAL"
+	BankAccountTypeCorporate  BankAccountType = "CORPORATE"
+
+	PaymentSubscriptionOnline  PaymentSubscription = "ONLINE"
+	PaymentSubscriptionOffline PaymentSubscription = "OFFLINE"
+	PaymentSubscriptionBoth    PaymentSubscription = "BOTH"
+
+	CompanyTypeSoleProprietorship CompanyType = "SOLE PROPRIETORSHIP"
+	CompanyTypePublicListed       CompanyType = "PUBLIC LISTED COMPANY (BHD)"
+	CompanyTypePrivateLimited     CompanyType = "PRIVATE LIMITED COMPANY (SDN BHD)"
+)
+
 // PaymentTransactionQRCode :
 type PaymentTransactionQRCode struct {
 	Store struct {
@@ -127,26 +144,27 @@ type TokenizedPaymentOrder struct {
 
 // Merchant :
 type Merchant struct {
-	ID                 string    `json:"id"`
-	BrandName          string    `json:"brandName"`
-	CompanyName        string    `json:"companyName"`
-	CompanyType        string    `json:"companyType"`
-	CompanyLogoURL     string    `json:"companyLogoUrl"`
-	RegistrationNumber string    `json:"registrationNumber"`
-	BusinessCategory   string    `json:"businessCategory"`
-	BusinessScope      string    `json:"businessScope"`
-	SourceOfFunds      string    `json:"sourceOfFunds"`
-	CustomerOrigin     string    `json:"customerOrigin"`
-	WebsiteURL         string    `json:"websiteUrl"`
-	EstablishedAt      time.Time `json:"establishedAt"`
-	CountryCode        string    `json:"countryCode"`
-	PhoneNumber        string    `json:"phoneNumber"`
-	AddressLine1       string    `json:"addressLine1"`
-	AddressLine2       string    `json:"addressLine2"`
-	Postcode           string    `json:"postcode"`
-	City               string    `json:"city"`
-	State              string    `json:"state"`
-	Country            string    `json:"country"`
+	ID                 string      `json:"id"`
+	BrandName          string      `json:"brandName"`
+	ShortName          string      `json:"shortName"`
+	CompanyName        string      `json:"companyName"`
+	CompanyType        CompanyType `json:"companyType"`
+	CompanyLogoURL     string      `json:"companyLogoUrl"`
+	RegistrationNumber string      `json:"registrationNumber"`
+	BusinessCategory   string      `json:"businessCategory"`
+	BusinessScope      string      `json:"businessScope"`
+	SourceOfFunds      string      `json:"sourceOfFunds"`
+	CustomerOrigin     string      `json:"customerOrigin"`
+	WebsiteURL         string      `json:"websiteUrl"`
+	EstablishedAt      time.Time   `json:"establishedAt"`
+	CountryCode        string      `json:"countryCode"`
+	PhoneNumber        string      `json:"phoneNumber"`
+	AddressLine1       string      `json:"addressLine1"`
+	AddressLine2       string      `json:"addressLine2"`
+	Postcode           string      `json:"postcode"`
+	City               string      `json:"city"`
+	State              string      `json:"state"`
+	Country            string      `json:"country"`
 	InvoiceAddress     struct {
 		AddressLine1 string `json:"addressLine1"`
 		AddressLine2 string `json:"addressLine2"`
@@ -198,18 +216,22 @@ type Store struct {
 
 // User :
 type User struct {
-	ID          string    `json:"id"`
-	FirstName   string    `json:"firstName"`
-	LastName    string    `json:"lastName"`
-	CountryCode string    `json:"countryCode"`
-	PhoneNumber string    `json:"phoneNumber"`
-	Email       string    `json:"email"`
-	AvatarURL   string    `json:"avatarUrl"`
-	Status      string    `json:"status"`
-	StoreID     string    `json:"storeId"`
-	IsActive    bool      `json:"isActive"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
+	ID             string    `json:"id"`
+	FirstName      string    `json:"firstName"`
+	LastName       string    `json:"lastName"`
+	CountryCode    string    `json:"countryCode"`
+	PhoneNumber    string    `json:"phoneNumber"`
+	Email          string    `json:"email"`
+	AvatarURL      string    `json:"avatarUrl"`
+	Status         string    `json:"status"`
+	StoreIDs       []string  `json:"storeId"` // RM returns an array instead
+	CurrentStoreID string    `json:"currentStoreId"`
+	IsActive       bool      `json:"isActive"`
+	CreatedAt      time.Time `json:"createdAt"`
+	UpdatedAt      time.Time `json:"updatedAt"`
+	ExtraInfo      struct {
+		ReceivePaymentNotification bool `json:"receivePaymentNotification"`
+	} `json:"extraInfo"`
 }
 
 // Voucher :
@@ -327,44 +349,44 @@ type LoyaltyMemberTierDiscount struct {
 
 // MerchantSettlement :
 type MerchantSettlement struct {
-	ID                      string          `json:"id" goloquent:"__key__"`
-	MerchantID              string          `json:"merchantId"`
-	IsDefault               bool            `json:"isDefault"`
-	Name                    string          `json:"companyName"`
-	CompanyType             string          `json:"companyType"`
-	RegistrationNumber      string          `json:"registrationNumber"`
-	BusinessCategory        string          `json:"businessCategory"`
-	BusinessScope           string          `json:"businessScope" goloquent:",longtext"`
-	SourceOfFund            string          `json:"sourceOfFunds" goloquent:",longtext"`
-	CustomerOrigin          string          `json:"customerOrigin" goloquent:",longtext"`
-	EstablishedDateTime     string          `json:"establishedAt"`
-	CountryCode             string          `json:"countryCode"`
-	PhoneNumber             string          `json:"phoneNumber"`
-	AddressLine1            string          `json:"addressLine1"`
-	AddressLine2            string          `json:"addressLine2"`
-	Postcode                string          `json:"postcode"`
-	City                    string          `json:"city"`
-	State                   string          `json:"state"`
-	Country                 string          `json:"country"`
-	IsSameBusinessAddress   bool            `json:"isSameBusinessAddress"`
-	InvoiceAddress          *InvoiceAddress `json:"invoiceAddress"`
-	InspectList             []InspectList   `json:"inspectList"`
-	Status                  string          `json:"status"`
-	Document                *Document       `json:"document"`
-	DocumentFile            DocumentFile    `json:"documentFile"`
-	BankAccountNo           string          `json:"bankAccountNo"`
-	BankAccountType         string          `json:"bankAccountType"`
-	BankAccountHolderName   string          `json:"bankAccountHolderName"`
-	BankName                string          `json:"bankName" goloquent:"-"`
-	BankCode                string          `json:"bankCode"`
-	AverageTicketSize       uint64          `json:"averageTicketSize"`
-	AverageTurnoverPerMonth uint64          `json:"averageTurnoverPerMonth"`
-	PaymentSubscription     string          `json:"paymentSubscription"`
-	AgentRate               uint64          `json:"agentRate"`
-	CreatedDateTime         string          `json:"createdAt"`
-	UpdatedDateTime         string          `json:"updatedAt"`
-	TaxInfo                 TaxInfo         `json:"taxInfo"`
-	HasTaxInfo              bool            `json:"hasTaxInfo"`
+	ID                      string              `json:"id" goloquent:"__key__"`
+	MerchantID              string              `json:"merchantId"`
+	IsDefault               bool                `json:"isDefault"`
+	Name                    string              `json:"companyName"`
+	CompanyType             string              `json:"companyType"`
+	RegistrationNumber      string              `json:"registrationNumber"`
+	BusinessCategory        string              `json:"businessCategory"`
+	BusinessScope           string              `json:"businessScope" goloquent:",longtext"`
+	SourceOfFund            string              `json:"sourceOfFunds" goloquent:",longtext"`
+	CustomerOrigin          string              `json:"customerOrigin" goloquent:",longtext"`
+	EstablishedDateTime     string              `json:"establishedAt"`
+	CountryCode             string              `json:"countryCode"`
+	PhoneNumber             string              `json:"phoneNumber"`
+	AddressLine1            string              `json:"addressLine1"`
+	AddressLine2            string              `json:"addressLine2"`
+	Postcode                string              `json:"postcode"`
+	City                    string              `json:"city"`
+	State                   string              `json:"state"`
+	Country                 string              `json:"country"`
+	IsSameBusinessAddress   bool                `json:"isSameBusinessAddress"`
+	InvoiceAddress          *InvoiceAddress     `json:"invoiceAddress"`
+	InspectList             []InspectList       `json:"inspectList"`
+	Status                  string              `json:"status"`
+	Document                *Document           `json:"document"`
+	DocumentFile            DocumentFile        `json:"documentFile"`
+	BankAccountNo           string              `json:"bankAccountNo"`
+	BankAccountType         BankAccountType     `json:"bankAccountType"`
+	BankAccountHolderName   string              `json:"bankAccountHolderName"`
+	BankName                string              `json:"bankName" goloquent:"-"`
+	BankCode                string              `json:"bankCode"`
+	AverageTicketSize       uint64              `json:"averageTicketSize"`
+	AverageTurnoverPerMonth uint64              `json:"averageTurnoverPerMonth"`
+	PaymentSubscription     PaymentSubscription `json:"paymentSubscription"`
+	AgentRate               uint64              `json:"agentRate"`
+	CreatedDateTime         string              `json:"createdAt"`
+	UpdatedDateTime         string              `json:"updatedAt"`
+	TaxInfo                 TaxInfo             `json:"taxInfo"`
+	HasTaxInfo              bool                `json:"hasTaxInfo"`
 }
 
 type TaxInfo struct {
