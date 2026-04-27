@@ -129,6 +129,7 @@ type TokenizedPaymentOrder struct {
 type Merchant struct {
 	ID                 string    `json:"id"`
 	BrandName          string    `json:"brandName"`
+	ShortName          string    `json:"shortName"`
 	CompanyName        string    `json:"companyName"`
 	CompanyType        string    `json:"companyType"`
 	CompanyLogoURL     string    `json:"companyLogoUrl"`
@@ -198,18 +199,22 @@ type Store struct {
 
 // User :
 type User struct {
-	ID          string    `json:"id"`
-	FirstName   string    `json:"firstName"`
-	LastName    string    `json:"lastName"`
-	CountryCode string    `json:"countryCode"`
-	PhoneNumber string    `json:"phoneNumber"`
-	Email       string    `json:"email"`
-	AvatarURL   string    `json:"avatarUrl"`
-	Status      string    `json:"status"`
-	StoreID     string    `json:"storeId"`
-	IsActive    bool      `json:"isActive"`
-	CreatedAt   time.Time `json:"createdAt"`
-	UpdatedAt   time.Time `json:"updatedAt"`
+	ID             string    `json:"id"`
+	FirstName      string    `json:"firstName"`
+	LastName       string    `json:"lastName"`
+	CountryCode    string    `json:"countryCode"`
+	PhoneNumber    string    `json:"phoneNumber"`
+	Email          string    `json:"email"`
+	AvatarURL      string    `json:"avatarUrl"`
+	Status         string    `json:"status"`
+	StoreIDs       []string  `json:"storeId"` // RM returns an array instead
+	CurrentStoreID string    `json:"currentStoreId"`
+	IsActive       bool      `json:"isActive"`
+	CreatedAt      time.Time `json:"createdAt"`
+	UpdatedAt      time.Time `json:"updatedAt"`
+	ExtraInfo      struct {
+		ReceivePaymentNotification bool `json:"receivePaymentNotification"`
+	} `json:"extraInfo"`
 }
 
 // Voucher :

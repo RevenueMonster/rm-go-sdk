@@ -12,7 +12,7 @@ type ResponseMerchantSettlement struct {
 	Err  *Error             `json:"error"`
 }
 
-// ResponseMerchantSubscriptions :
+// ResponseMerchantSettlements :
 type ResponseMerchantSettlements struct {
 	Items []MerchantSettlement `json:"items"`
 	Code  string               `json:"code"`
