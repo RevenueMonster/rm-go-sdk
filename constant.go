@@ -90,6 +90,13 @@ var pathAPIGetStoreByIDURL = newPath(methodGET, "/store")
 var pathAPIGetMerchantURL = newPath(methodGET, "/merchant")
 var pathAPIGetMerchantSubscriptionsURL = newPath(methodGET, "/merchant/subscriptions")
 
+// Partner Merchant
+var pathAPICreatePartnerMerchantURL = newPath(methodPOST, "/partner/merchant")
+var pathAPIGetPartnerMerchantsURL = newPath(methodGET, "/partner/merchants")
+var pathAPIGetPartnerMerchantByIDURL = newPath(methodGET, "/partner/merchant/{merchant_id}")
+var pathAPIUpdatePartnerMerchantURL = newPath(methodPATCH, "/partner/merchant/{merchant_id}")
+var pathAPISubmitPartnerMerchantURL = newPath(methodPOST, "/partner/merchant/{merchant_id}")
+
 // Account Information
 var pathAPIGetSettlementAccount = newPath(methodGET, "/account")
 var pathAPIGetSettlementAccountList = newPath(methodGET, "/accounts")
