@@ -6,10 +6,13 @@ import (
 	"reflect"
 	"time"
 
+	"github.com/go-playground/validator/v10"
 	api "github.com/myussufz/fasthttp-api"
 )
 
 var cacheToken map[string]Token
+
+var validate = validator.New()
 
 // Client :
 type Client struct {
