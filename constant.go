@@ -45,7 +45,10 @@ const sandboxAPIURL = "https://sb-open.revenuemonster.my"
 
 // oauthdomain
 const productionOAuthURL = "https://oauth.revenuemonster.my"
+
 const sandboxOAuthURL = "https://sb-oauth.revenuemonster.my"
+
+// const sandboxOAuthURL = "http://local-oauth.revenuemonster.my:2002"
 
 // Path
 // Oauth path
@@ -158,6 +161,13 @@ var pathAPIGetFpxBankList = newPath(methodGET, "/payment/fpx-bank")
 // Visa Offers Platform
 var pathCreateVOPSubscription = newPath(methodPOST, "/customer/{customer_id}/subscription")
 var pathDeleteVOPSubscription = newPath(methodDELETE, "/customer/{customer_id}/subscription")
+
+// Invoice
+var pathAPIGetInvoicesURL = newPath(methodGET, "/invoices")
+var pathAPICreateInvoiceURL = newPath(methodPOST, "/invoice")
+var pathAPIGetInvoiceByIDURL = newPath(methodGET, "/invoice/{invoice_id}")
+var pathAPICancelInvoiceByIDURL = newPath(methodPOST, "/invoice/{invoice_id}/cancel")
+var pathAPIEditInvoiceURL = newPath(methodPATCH, "/invoice/{invoice_id}")
 
 // loyalty
 var pathCheckMemberExist = newPath(methodPOST, "/loyalty/member/check")
